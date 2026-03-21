@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seven Frictions — Authored Craft</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --black: #0a0a08;
+  --white: #f5f3ee;
+  --accent: #c2542d;
+  --muted: #8a8578;
+  --faint: #d8d3c8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+.page-hero { padding: 8rem 2rem 4rem; max-width: 780px; margin: 0 auto; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.page-hero h1 em { font-style: italic; color: var(--accent); }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+/* STRATA */
+.stratum {
+  padding: 4rem 2rem;
+  transition: opacity 0.4s;
+}
+
+.stratum-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stratum-number {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.stratum-name {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.stratum-def {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.stratum-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+  max-width: 640px;
+}
+
+.stratum-attr {
+  font-size: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.practitioners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.prac {
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.prac .prac-name { font-weight: 700; }
+.prac .prac-what { font-weight: 400; display: block; font-size: 0.7rem; margin-top: 2px; }
+
+/* LAYER COLOURS — getting progressively deeper */
+
+/* 1 - Withheld: lightest, almost white */
+.s-withheld { background: #f0ede6; color: #3d3a33; }
+.s-withheld .stratum-number { color: #a09a8c; }
+.s-withheld .stratum-attr { color: #8a8578; }
+.s-withheld .prac { background: rgba(0,0,0,0.05); color: #3d3a33; }
+
+/* 2 - Excavated: warm sand */
+.s-excavated { background: #e8e0d0; color: #3d3520; }
+.s-excavated .stratum-number { color: #a09070; }
+.s-excavated .stratum-attr { color: #7a7060; }
+.s-excavated .prac { background: rgba(0,0,0,0.06); color: #3d3520; }
+
+/* 3 - Constrained: warm grey */
+.s-constrained { background: #d5cfc2; color: #33302a; }
+.s-constrained .stratum-number { color: #8a8578; }
+.s-constrained .stratum-attr { color: #6a665c; }
+.s-constrained .prac { background: rgba(0,0,0,0.07); color: #33302a; }
+
+/* 4 - Refused: warm earth */
+.s-refused { background: #bfb8a8; color: #2a2820; }
+.s-refused .stratum-number { color: #7a7568; }
+.s-refused .stratum-attr { color: #5a5748; }
+.s-refused .prac { background: rgba(0,0,0,0.08); color: #2a2820; }
+
+/* 5 - Orchestrated: deeper earth */
+.s-orchestrated { background: #968e7e; color: #f5f3ee; }
+.s-orchestrated .stratum-number { color: rgba(255,255,255,0.5); }
+.s-orchestrated .stratum-attr { color: rgba(255,255,255,0.6); }
+.s-orchestrated .stratum-def { color: rgba(255,255,255,0.8); }
+.s-orchestrated .prac { background: rgba(255,255,255,0.12); color: #f5f3ee; }
+
+/* 6 - Embodied: dark stone */
+.s-embodied { background: #4a4640; color: #f5f3ee; }
+.s-embodied .stratum-number { color: rgba(255,255,255,0.4); }
+.s-embodied .stratum-attr { color: rgba(255,255,255,0.5); }
+.s-embodied .stratum-def { color: rgba(255,255,255,0.75); }
+.s-embodied .prac { background: rgba(255,255,255,0.1); color: #f5f3ee; }
+
+/* 7 - Tested: deepest, near black */
+.s-tested { background: #1a1918; color: #f5f3ee; }
+.s-tested .stratum-number { color: rgba(255,255,255,0.3); }
+.s-tested .stratum-attr { color: rgba(255,255,255,0.4); }
+.s-tested .stratum-def { color: rgba(255,255,255,0.7); }
+.s-tested .prac { background: rgba(255,255,255,0.08); color: #f5f3ee; }
+
+footer { padding: 4rem 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--faint); }
+footer a { color: var(--accent); text-decoration: none; }
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .page-hero { padding: 6rem 1.5rem 3rem; }
+  .stratum { padding: 3rem 1.5rem; }
+  .prac .prac-what { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,243,238,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,211,200,0.5);padding:0 2rem;display:flex;align-items:center;height:48px;font-family:var(--sans);font-size:0.8rem;">
+  <a href="index.html" style="font-family:var(--serif);font-size:1rem;color:var(--black);text-decoration:none;margin-right:auto;">Authored Craft</a>
+  <a href="index.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Argument</a>
+  <a href="journey.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Journey</a>
+  <a href="community.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Community</a>
+  <a href="practices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Practices</a>
+  <a href="frictions.html" style="color:var(--accent);text-decoration:none;margin-left:2rem;font-weight:500;">Frictions</a>
+  <a href="data.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Data</a>
+</nav>
+
+<div class="page-hero">
+  <h1>Seven <em>Frictions</em></h1>
+  <p class="subtitle">Every practice introduces friction deliberately. The research identified seven modes — seven ways of resisting the frictionless. Scroll deeper.</p>
+</div>
+
+<section style="max-width:780px;margin:0 auto;padding:2rem 2rem 4rem;" class="fade-in">
+  <p style="font-size:1.05rem;line-height:1.7;margin-bottom:1.5rem;">Friction operates on three nested layers. The practitioner carries it in their biography, their spiritual practice, their accumulated time. The process carries it in the materials they use, the research they do, the economic constraints they accept. The output carries it in how the work communicates, ages, and reveals itself.</p>
+  <p style="font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;">The seven friction modes describe <em>how</em> friction is introduced across these layers. Some modes operate primarily on the practitioner (The Withheld, The Embodied). Some on the process (The Excavated, The Constrained). Some on the relationship between the work and the world (The Refused, The Orchestrated, The Tested). Together, they form a taxonomy of deliberate resistance.</p>
+
+  <svg viewBox="0 0 680 340" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 2rem;">
+    <!-- Three layer bands -->
+    <rect x="40" y="20" width="600" height="80" rx="6" fill="#f0ede6" stroke="#d8d3c8" stroke-width="0.5"/>
+    <rect x="40" y="120" width="600" height="80" rx="6" fill="#d5cfc2" stroke="#bfb8a8" stroke-width="0.5"/>
+    <rect x="40" y="220" width="600" height="80" rx="6" fill="#4a4640" stroke="#33302a" stroke-width="0.5"/>
+
+    <!-- Layer labels -->
+    <text x="60" y="48" font-family="'Playfair Display',Georgia,serif" font-size="16" fill="#3d3a33" font-weight="400">Layer 3: The Output</text>
+    <text x="60" y="68" font-family="'DM Sans',sans-serif" font-size="11" fill="#8a8578">How the work communicates, ages, reveals itself</text>
+
+    <text x="60" y="148" font-family="'Playfair Display',Georgia,serif" font-size="16" fill="#33302a" font-weight="400">Layer 2: The Process</text>
+    <text x="60" y="168" font-family="'DM Sans',sans-serif" font-size="11" fill="#6a665c">Materials, research, constraints, collaboration</text>
+
+    <text x="60" y="248" font-family="'Playfair Display',Georgia,serif" font-size="16" fill="#f5f3ee" font-weight="400">Layer 1: The Practitioner</text>
+    <text x="60" y="268" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.6)">Biography, spiritual practice, accumulated time</text>
+
+    <!-- Mode pills positioned on their primary layer -->
+    <!-- Output-layer modes -->
+    <rect x="400" y="35" width="95" height="26" rx="13" fill="none" stroke="#8a8578" stroke-width="0.75"/>
+    <text x="447" y="52" font-family="'DM Sans',sans-serif" font-size="10" fill="#3d3a33" text-anchor="middle" font-weight="500">Withheld</text>
+
+    <rect x="510" y="35" width="110" height="26" rx="13" fill="none" stroke="#8a8578" stroke-width="0.75"/>
+    <text x="565" y="52" font-family="'DM Sans',sans-serif" font-size="10" fill="#3d3a33" text-anchor="middle" font-weight="500">Orchestrated</text>
+
+    <!-- Process-layer modes -->
+    <rect x="370" y="135" width="100" height="26" rx="13" fill="none" stroke="#7a7568" stroke-width="0.75"/>
+    <text x="420" y="152" font-family="'DM Sans',sans-serif" font-size="10" fill="#33302a" text-anchor="middle" font-weight="500">Excavated</text>
+
+    <rect x="485" y="135" width="110" height="26" rx="13" fill="none" stroke="#7a7568" stroke-width="0.75"/>
+    <text x="540" y="152" font-family="'DM Sans',sans-serif" font-size="10" fill="#33302a" text-anchor="middle" font-weight="500">Constrained</text>
+
+    <!-- Practitioner-layer modes -->
+    <rect x="370" y="235" width="100" height="26" rx="13" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.75"/>
+    <text x="420" y="252" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f3ee" text-anchor="middle" font-weight="500">Embodied</text>
+
+    <rect x="485" y="235" width="80" height="26" rx="13" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.75"/>
+    <text x="525" y="252" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f3ee" text-anchor="middle" font-weight="500">Tested</text>
+
+    <!-- Cross-layer modes (spanning) -->
+    <rect x="400" y="75" width="88" height="26" rx="13" fill="none" stroke="#c2542d" stroke-width="1"/>
+    <text x="444" y="92" font-family="'DM Sans',sans-serif" font-size="10" fill="#c2542d" text-anchor="middle" font-weight="500">Refused</text>
+    <line x1="444" y1="101" x2="444" y2="120" stroke="#c2542d" stroke-width="0.75" stroke-dasharray="3 3"/>
+
+    <!-- Cascade arrow -->
+    <line x1="28" y1="60" x2="28" y2="260" stroke="#bfb8a8" stroke-width="1"/>
+    <polygon points="24,258 28,270 32,258" fill="#bfb8a8"/>
+    <text x="18" y="170" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8578" text-anchor="middle" transform="rotate(-90,18,170)" letter-spacing="0.1em">DEEPER</text>
+
+    <!-- Caption -->
+    <text x="340" y="328" font-family="'DM Sans',sans-serif" font-size="10" fill="#8a8578" text-anchor="middle">Modes map to the layer where their friction is strongest. Some span layers. The Refused crosses all three.</text>
+  </svg>
+
+  <p style="font-size:0.95rem;line-height:1.7;color:#8a8578;">Below, the seven modes are presented as strata — geological layers that darken as you scroll deeper, from the light surface of The Withheld to the dark bedrock of The Tested. Each layer carries the practitioners who work within it and the friction they introduce.</p>
+</section>
+
+<div class="stratum s-withheld fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 01 · 7 practices</div>
+    <div class="stratum-name">The Withheld</div>
+    <div class="stratum-def">Friction through silence, restraint, and the refusal to fill every space. The authored absence. What is not said, not shown, not offered.</div>
+    <div class="stratum-quote">"Emptiness is a creative receptacle."</div>
+    <div class="stratum-attr">Kenya Hara</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Phoebe Philo</span><span class="prac-what">No advertising, no interviews, no content strategy</span></div>
+      <div class="prac"><span class="prac-name">Kenya Hara / Muji</span><span class="prac-what">Emptiness as design philosophy</span></div>
+      <div class="prac"><span class="prac-name">Jasper Morrison</span><span class="prac-what">Super Normal — objects that disappear into use</span></div>
+      <div class="prac"><span class="prac-name">The Row</span><span class="prac-what">Radical quiet in a loud industry</span></div>
+      <div class="prac"><span class="prac-name">Frida Escobedo</span><span class="prac-what">Buildings that reveal themselves slowly</span></div>
+      <div class="prac"><span class="prac-name">Matthieu Blazy</span><span class="prac-what">Craft so advanced it becomes invisible</span></div>
+      <div class="prac"><span class="prac-name">Kenya Hara / NDC</span><span class="prac-what">Making the known unknown</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-excavated fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 02 · 7 practices</div>
+    <div class="stratum-name">The Excavated</div>
+    <div class="stratum-def">Friction through deep investigation — digging into materials, heritage, place, and time. The two-year research project. The archaeological instinct.</div>
+    <div class="stratum-quote">"Materials are heavy and must therefore be local. But ideas, being light, can travel."</div>
+    <div class="stratum-attr">Jan Boelen, Atelier LUMA</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Lina Ghotmeh</span><span class="prac-what">Archaeology of the future</span></div>
+      <div class="prac"><span class="prac-name">Formafantasma</span><span class="prac-what">Two-year material investigations before form</span></div>
+      <div class="prac"><span class="prac-name">Atelier LUMA</span><span class="prac-what">Bioregional mapping — what does this place produce as waste?</span></div>
+      <div class="prac"><span class="prac-name">Visvim</span><span class="prac-what">Travelling to meet artisans whose techniques predate industry</span></div>
+      <div class="prac"><span class="prac-name">Torrisi / MFG</span><span class="prac-what">Italian-American nostalgia, returned at extraordinary execution</span></div>
+      <div class="prac"><span class="prac-name">Tartine</span><span class="prac-what">Guiding fermentation — decades of dialogue with living cultures</span></div>
+      <div class="prac"><span class="prac-name">Loose Joints</span><span class="prac-what">Years of correspondence before a book exists</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-constrained fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 03 · 9 practices</div>
+    <div class="stratum-name">The Constrained</div>
+    <div class="stratum-def">Friction through self-imposed limits. The 40-colour palette. The 11-page uniform manual. The $20,000 budget. Boundaries that generate freedom.</div>
+    <div class="stratum-quote">"The more boundaries you have, the more freedom you can find in the small things."</div>
+    <div class="stratum-attr">Matthieu Blazy</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Teenage Engineering</span><span class="prac-what">Only 40 RAL colours. No meetings.</span></div>
+      <div class="prac"><span class="prac-name">Thom Browne</span><span class="prac-what">11-page uniform manual. The morning run as design system.</span></div>
+      <div class="prac"><span class="prac-name">Rural Studio</span><span class="prac-what">$20,000 per house. The budget is the brief.</span></div>
+      <div class="prac"><span class="prac-name">Linear</span><span class="prac-what">Opinionated defaults. No A/B tests.</span></div>
+      <div class="prac"><span class="prac-name">Issey Miyake</span><span class="prac-what">The pleat as system — robust enough to outlive the founder</span></div>
+      <div class="prac"><span class="prac-name">Satisfy</span><span class="prac-what">Running as constraint — designing from the body's limits</span></div>
+      <div class="prac"><span class="prac-name">Figma</span><span class="prac-what">Design systems as opinionated infrastructure</span></div>
+      <div class="prac"><span class="prac-name">Pentagram</span><span class="prac-what">The federation — no boss, no house style, shared infrastructure</span></div>
+      <div class="prac"><span class="prac-name">Order</span><span class="prac-what">Standards and systems, built with temporal patience</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-refused fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 04 · 8 practices</div>
+    <div class="stratum-name">The Refused</div>
+    <div class="stratum-def">Friction through strategic no. Declining what the market expects. Killing what works. What you refuse defines you more than what you make.</div>
+    <div class="stratum-quote">"Imagine writing an essay justifying why you were moving on from your candle business at the dawn of electric light."</div>
+    <div class="stratum-attr">Josh Miller, Browser Company</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Porto Rocha</span><span class="prac-what">No free pitches. The journey cannot be separated from the output.</span></div>
+      <div class="prac"><span class="prac-name">Browser Company</span><span class="prac-what">Killed Arc — the most beloved browser in a decade</span></div>
+      <div class="prac"><span class="prac-name">Are.na</span><span class="prac-what">No algorithm. No AI. No ads. No venture capital.</span></div>
+      <div class="prac"><span class="prac-name">MSCHF</span><span class="prac-what">No consistent brand identity. No category.</span></div>
+      <div class="prac"><span class="prac-name">Christopher Anderson</span><span class="prac-what">No commercial commissions for years at a time</span></div>
+      <div class="prac"><span class="prac-name">Moniker</span><span class="prac-what">Closed the studio. The refusal to continue.</span></div>
+      <div class="prac"><span class="prac-name">Monocle</span><span class="prac-what">Print in a digital age. The format is the refusal.</span></div>
+      <div class="prac"><span class="prac-name">Counter Print</span><span class="prac-what">Design books in physical form only</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-orchestrated fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 05 · 6 practices</div>
+    <div class="stratum-name">The Orchestrated</div>
+    <div class="stratum-def">Friction through careful curation, sequencing, and the assembly of many inputs into a coherent whole. The editorial instinct applied to everything.</div>
+    <div class="stratum-quote">"The orchestration is the product. The model is a tool."</div>
+    <div class="stratum-attr">Aravind Srinivas, Perplexity</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Perplexity</span><span class="prac-what">19 models orchestrated simultaneously. Citation as design.</span></div>
+      <div class="prac"><span class="prac-name">Vercel</span><span class="prac-what">Infrastructure with a point of view about how the web should work</span></div>
+      <div class="prac"><span class="prac-name">Collins</span><span class="prac-what">Design as transformation — making things possible, not making things</span></div>
+      <div class="prac"><span class="prac-name">Stripe Press</span><span class="prac-what">Books as long bets. Publishing as corporate conviction.</span></div>
+      <div class="prac"><span class="prac-name">Jonathan Anderson</span><span class="prac-what">Craft within luxury — working out why we make things</span></div>
+      <div class="prac"><span class="prac-name">Baby Teeth</span><span class="prac-what">Three founders, three skills, ideas as IP not deliverables</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-embodied fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 06 · 8 practices</div>
+    <div class="stratum-name">The Embodied</div>
+    <div class="stratum-def">Friction through the body — physical presence, material contact, place, time, and the hand that cannot be replaced. The most AI-resistant mode.</div>
+    <div class="stratum-quote">"Craft is within yourself, not necessarily outside."</div>
+    <div class="stratum-attr">Bijoy Jain, Studio Mumbai</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Peter Zumthor</span><span class="prac-what">Walks sites for months. Builds from local aggregate. Score: 5.</span></div>
+      <div class="prac"><span class="prac-name">Studio Mumbai</span><span class="prac-what">No drawings. Workers read the stone. Score: 5.</span></div>
+      <div class="prac"><span class="prac-name">Vo Trong Nghia</span><span class="prac-what">Staff meditate 2 hours daily. 42,000 bamboo culms. Score: 5.</span></div>
+      <div class="prac"><span class="prac-name">Faye Toogood</span><span class="prac-what">Everything starts with the hand. Emotional over artificial intelligence.</span></div>
+      <div class="prac"><span class="prac-name">Lemaire</span><span class="prac-what">Clothes that look good wrinkled. The collar a bit too loose.</span></div>
+      <div class="prac"><span class="prac-name">Loose Joints</span><span class="prac-what">Paper stock that argues with the photographs it carries</span></div>
+      <div class="prac"><span class="prac-name">DixonBaxi</span><span class="prac-what">Motion and broadcast, rooted in two decades of embodied practice</span></div>
+      <div class="prac"><span class="prac-name">APFEL</span><span class="prac-what">Deliberately different aesthetic instincts held in creative tension</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stratum s-tested fade-in">
+  <div class="stratum-inner">
+    <div class="stratum-number">Mode 07 · 6 practices</div>
+    <div class="stratum-name">The Tested</div>
+    <div class="stratum-def">Friction through exposure to reality — the market, the user, the community, time itself. Work that has survived contact with the world and carries the scars.</div>
+    <div class="stratum-quote">"I always make a point of choosing the difficult way."</div>
+    <div class="stratum-attr">Oki Sato, Nendo</div>
+    <div class="practitioners">
+      <div class="prac"><span class="prac-name">Nothing</span><span class="prac-what">Consumer electronics tested against $200M in real revenue</span></div>
+      <div class="prac"><span class="prac-name">Google Creative Lab</span><span class="prac-what">Experimental creativity tested inside the world's largest company</span></div>
+      <div class="prac"><span class="prac-name">Nendo</span><span class="prac-what">400 projects simultaneously. The "!" moment tested at volume.</span></div>
+      <div class="prac"><span class="prac-name">Officine Buly</span><span class="prac-what">19th-century anachronism tested against modern retail</span></div>
+      <div class="prac"><span class="prac-name">Wolff Olins</span><span class="prac-what">60 years of disruption survived. Five reinventions and counting.</span></div>
+      <div class="prac"><span class="prac-name">Base Design</span><span class="prac-what">Three decades across cultural and commercial boundaries</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><a href="index.html">The Argument</a> · <a href="journey.html">The Journey</a> · <a href="community.html">The Community</a> · <a href="practices.html">The Practices</a> · <a href="frictions.html">The Frictions</a> · <a href="data.html">The Data</a></p>
+  <p style="margin-top:1rem;">Authored Craft — A Book of Frictions. Research conducted March 2026.</p>
+  <p style="margin-top:0.5rem;">By Ed Cotton · <a href="https://invernessconsulting.com">Inverness Consulting</a></p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

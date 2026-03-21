@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community — Authored Craft</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --black: #0a0a08;
+  --white: #f5f3ee;
+  --cream: #ece8df;
+  --warm: #d4c5a9;
+  --accent: #c2542d;
+  --muted: #8a8578;
+  --faint: #d8d3c8;
+  --teal: #1d6e56;
+  --coral: #c2542d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+section { padding: 6rem 2rem; max-width: 780px; margin: 0 auto; }
+h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.02em; }
+h3 { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1rem; }
+p { margin-bottom: 1.4rem; }
+p.lead { font-size: 1.25rem; line-height: 1.6; }
+
+.pull { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.25rem); font-style: italic; line-height: 1.3; padding: 3rem 0; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); margin: 3rem 0; }
+.pull .attr { display: block; font-family: var(--sans); font-style: normal; font-size: 0.8rem; color: var(--muted); margin-top: 1rem; letter-spacing: 0.05em; }
+
+.divider { height: 1px; background: var(--faint); max-width: 780px; margin: 0 auto; }
+
+section.dark { background: var(--black); color: var(--white); max-width: none; padding: 6rem 2rem; }
+section.dark .inner { max-width: 780px; margin: 0 auto; }
+section.dark h2 { color: var(--white); }
+section.dark h3 { color: var(--warm); }
+section.dark .pull { border-color: rgba(255,255,255,0.15); color: var(--white); }
+section.dark .pull .attr { color: var(--warm); }
+section.dark p { color: rgba(255,255,255,0.8); }
+
+.page-hero { padding: 8rem 2rem 4rem; max-width: 780px; margin: 0 auto; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.page-hero h1 em { font-style: italic; color: var(--accent); }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+.principle { padding: 2rem 0; border-bottom: 1px solid var(--faint); }
+.principle:last-child { border-bottom: none; }
+.principle .principle-name { font-family: var(--serif); font-size: 1.25rem; font-style: italic; margin-bottom: 0.5rem; }
+.principle .principle-text { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+.principle .principle-who { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); margin-top: 0.5rem; }
+
+.resistance-item { padding: 2.5rem 0; border-bottom: 1px solid var(--faint); }
+.resistance-item:last-child { border-bottom: none; }
+.resistance-item .r-title { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 0.75rem; }
+.resistance-item .r-body { font-size: 0.95rem; line-height: 1.6; }
+
+footer { padding: 4rem 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--faint); }
+footer a { color: var(--accent); text-decoration: none; }
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) { section { padding: 4rem 1.5rem; } .page-hero { padding: 6rem 1.5rem 3rem; } }
+</style>
+</head>
+<body>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,243,238,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,211,200,0.5);padding:0 2rem;display:flex;align-items:center;height:48px;font-family:var(--sans);font-size:0.8rem;">
+  <a href="index.html" style="font-family:var(--serif);font-size:1rem;color:var(--black);text-decoration:none;margin-right:auto;">Authored Craft</a>
+  <a href="index.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Argument</a>
+  <a href="journey.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Journey</a>
+  <a href="community.html" style="color:var(--accent);text-decoration:none;margin-left:2rem;font-weight:500;">Community</a>
+  <a href="practices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Practices</a>
+  <a href="frictions.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Frictions</a>
+  <a href="data.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Data</a>
+</nav>
+
+<div class="page-hero">
+  <h1>The <em>Community</em></h1>
+  <p class="subtitle">The creative world loves its silos. But never before have all disciplines faced the same existential threat simultaneously. It is time to see each other clearly.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The isolation</h3>
+  <h2>Fifty-one practices, fighting alone</h2>
+  <p class="lead">The people doing the most important creative work on earth do not know they are part of the same movement.</p>
+  <p>Zumthor in Haldenstein does not know he shares a principle with Robertson in San Francisco. Nghia in Ho Chi Minh City does not know his meditation practice connects to Partouche's morning run in Paris. Formafantasma in Amsterdam do not know their material investigations mirror Ghotmeh's archaeological approach. Baby Teeth in London do not know their IP ownership model is the commercial answer to the same question Porto Rocha is asking with No Free Pitches.</p>
+  <p>This book is the first time these fifty-one practices have been placed in the same frame. The fact that the frame did not exist before now is itself a finding about the state of creativity in 2026.</p>
+  <p>The threat is not coming for them individually. AI does not threaten Zumthor specifically or Robertson specifically or Philo specifically. It threatens the <em>principle</em> they all share: that the journey matters, that friction produces value, that the slow accumulation of human decisions in contact with resistant materials creates something generation cannot.</p>
+  <p>No individual practice can fight that alone.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The parallel</h3>
+  <h2>Learning from the last existential threat</h2>
+  <p>The industrial revolution is the last time every creative discipline faced the same structural threat simultaneously.</p>
+  <p>The Arts and Crafts movement responded by organising across disciplines. Morris was a textile designer, typographer, furniture maker, publisher, poet. The movement connected weavers to architects to printers to metalworkers. It was cross-disciplinary by necessity.</p>
+  <p>And it failed. Not because the principle was wrong — it was correct then and is correct now. It failed because it retreated into preciousness. Beautiful things only the wealthy could afford. Craft as the opposite of industry rather than a different mode of production. A luxury niche. The machines won because they were accessible.</p>
+  <p>The Bauhaus learned from that failure. Gropius brought together architects, painters, weavers, metalworkers, typographers, theatre designers. The preliminary course forced every student through every material before specialising. The thesis: understanding materials across disciplines produces better work within each one.</p>
+  <p>The Bauhaus succeeded because it engaged with the threat. It said: the machine is here, so let's figure out what human creativity does <em>with</em> the machine that the machine cannot do alone. The answer was design — the human judgement about what to make, for whom, with what meaning.</p>
+  <p><strong>But AI requires a third response.</strong> The industrial revolution replaced hands. AI replaces minds. The Bauhaus said: master the machine, direct it. That worked when the machine was dumb. AI is not dumb. The human contribution needs to be something deeper than direction.</p>
+  <p>That something is the journey.</p>
+</section>
+
+<section class="dark">
+  <div class="inner fade-in">
+    <h3>The recognition</h3>
+    <h2>What the disciplines share but don't know they share</h2>
+    <p class="lead" style="color:rgba(255,255,255,0.9);">The silos aren't just preventing coordination. They're preventing recognition. Each discipline sees its own fraction of the pattern and mistakes it for the whole.</p>
+
+    <div class="principle">
+      <div class="principle-name">The inside precedes the outside</div>
+      <div class="principle-text">The practitioner's internal preparation determines the quality of the external output. Every discipline has a version. No cross-disciplinary vocabulary exists for it.</div>
+      <div class="principle-who">Nakamura (from the yarn outward) · Zumthor (walks before drawing) · Nghia (breathes before building) · Browne (runs before designing) · Philo (silent for a decade before speaking)</div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-name">Community precedes brand</div>
+      <div class="principle-text">The community existed before the product. The brand is the structure built on top. Remove the brand and the community survives. Remove the community and the brand is a logo on a t-shirt.</div>
+      <div class="principle-who">Partouche / Satisfy · Broskoski / Are.na · Robertson / Tartine · Chaplin / Loose Joints</div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-name">One artisan cannot finish the work of another</div>
+      <div class="principle-text">Human hands are not interchangeable. The specificity of the individual is the value. True in leather, in stone, in fermentation, in editorial judgement.</div>
+      <div class="principle-who">Blazy (Chanel atelier) · Studio Mumbai (stonework) · Robertson (each baker's microbiome) · Loose Joints (each book shaped by a specific relationship)</div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-name">The material speaks</div>
+      <div class="principle-text">The practitioner listens rather than imposes. The architects call it site-specificity. The bakers call it fermentation. The fashion designers call it materiality. The product designers call it constraint. Same thing.</div>
+      <div class="principle-who">Formafantasma · Robertson · Jain · Nghia · Kouthoofd · Nakamura</div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-name">Refusal is authorship</div>
+      <div class="principle-text">What you decline defines you more than what you accept. Each refusal is currently understood as an idiosyncrasy. They are instances of a shared principle.</div>
+      <div class="principle-who">Are.na (no algorithm) · Philo (no advertising) · Porto Rocha (no free pitches) · Browser Co. (killed Arc) · MSCHF (no category) · Counter Print (no digital)</div>
+    </div>
+  </div>
+</section>
+
+<section class="fade-in">
+  <h3>The structure</h3>
+  <h2>What creative community looks like</h2>
+  <p>Not a festival (output showcase). Not a conference (broadcast). Not an awards programme (ranks outputs). Not a membership organisation (reinforces silos). Not a manifesto (dead on arrival).</p>
+
+  <p><strong>A table, not a stage.</strong> Robertson and Zumthor at the same table, discovering that guiding fermentation and walking a site are the same act. Nghia and Partouche discovering that meditation and the morning run serve the same function. Porto Rocha and Baby Teeth discovering that No Free Pitches and IP ownership are the same structural move. The difference in material is what makes the shared principle visible.</p>
+
+  <p><strong>A residency, not an event.</strong> A weekend conference produces content. A month-long residency produces relationship. Practitioners from different disciplines spending time in each other's spaces — not to collaborate on a project but to witness each other's journeys. Atelier LUMA already does something like this in Arles.</p>
+
+  <p><strong>Shared practice, not shared output.</strong> The community doesn't make things together. It makes things alongside each other. An architect watching a baker is not learning to bake. They are learning something about how a practitioner relates to a material that resists.</p>
+
+  <p><strong>A living archive, not a publication.</strong> Not finished portfolios. The killed directions. The dead ends. The arguments that produced the breakthrough. The evidence that the journey is real. Are.na's structure — channels, connections — is closer to this than any existing platform.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The resistance</h3>
+  <h2>What the community does</h2>
+  <p>Not protest. Not advocacy. Something structural.</p>
+
+  <div class="resistance-item">
+    <div class="r-title">Changes what gets measured</div>
+    <div class="r-body">Introduces journey depth, client transformation, material engagement, accumulation. Not metrics that can be gamed. Descriptions of the journey's thickness that can be valued.</div>
+  </div>
+
+  <div class="resistance-item">
+    <div class="r-title">Changes what gets taught</div>
+    <div class="r-body">Rural Studio already teaches the journey. Formafantasma teach it at the design academy. Hara teaches it at Musashino. But they teach in isolation. The community connects these pedagogies across disciplines and shows students the principle is universal.</div>
+  </div>
+
+  <div class="resistance-item">
+    <div class="r-title">Changes what gets funded</div>
+    <div class="r-body">Neither venture capital (funds scale) nor grants (fund outputs) fund journeys. The LUMA Foundation model, the Stripe Press model, the Are.na model — these are prototypes for journey funding. The community amplifies and codifies them.</div>
+  </div>
+
+  <div class="resistance-item">
+    <div class="r-title">Changes what clients expect</div>
+    <div class="r-body">When enough practices consistently deliver transformational experiences rather than transactional outputs — and when the results are visibly superior — the market shifts. Not because clients are persuaded. Because they experience the difference.</div>
+  </div>
+
+  <div class="resistance-item">
+    <div class="r-title">Makes friction visible as a collective force</div>
+    <div class="r-body">One practice refusing to pitch for free is a quirk. Twenty practices across nine disciplines refusing to separate the journey from the output is a position. Fifty is a movement. A hundred is a new norm.</div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="inner fade-in">
+    <h3>The counter-technology</h3>
+    <h2>AI generates.<br>Community accumulates.</h2>
+    <p class="lead" style="color:rgba(255,255,255,0.9);">AI is a technology of generation. Community is a technology of accumulation. AI's thousandth output is identical to its first. A community's thousandth interaction is richer.</p>
+
+    <div class="pull">
+      "Materials are heavy and must therefore be local. But ideas, being light, can travel."
+      <span class="attr">Jan Boelen, Atelier LUMA</span>
+    </div>
+
+    <p>The creative community does not need to be unified in what it makes. It needs to be unified in what it believes: that the journey is the value. That friction produces depth. That good enough is not good enough. And that saying so, together, loudly, across every discipline, is the most important creative act of 2026.</p>
+
+    <div class="pull">
+      "Everyone, rich or poor, deserves a shelter for the soul."
+      <span class="attr">Samuel Mockbee, Rural Studio</span>
+    </div>
+
+    <p style="font-size:1.15rem;color:rgba(255,255,255,0.95);margin-top:2rem;">The disciplines don't need to merge. They need to recognise each other. To see that the journey exists in every discipline, that it is the same journey in different materials, and that it is time — past time — for the disciplines to see each other clearly.</p>
+    <p style="font-size:1.15rem;color:rgba(255,255,255,0.95);">As loudly as the machines.</p>
+  </div>
+</section>
+
+<footer>
+  <p><a href="index.html">The Argument</a> · <a href="journey.html">The Journey</a> · <a href="community.html">The Community</a> · <a href="practices.html">The Practices</a> · <a href="frictions.html">The Frictions</a> · <a href="data.html">The Data</a></p>
+  <p style="margin-top:1rem;">Authored Craft — A Book of Frictions. Research conducted March 2026.</p>
+  <p style="margin-top:0.5rem;">By Ed Cotton · <a href="https://invernessconsulting.com">Inverness Consulting</a></p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
