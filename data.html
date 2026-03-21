@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Data — Authored Craft</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --black: #0a0a08;
+  --white: #f5f3ee;
+  --cream: #ece8df;
+  --warm: #d4c5a9;
+  --accent: #c2542d;
+  --muted: #8a8578;
+  --faint: #d8d3c8;
+  --teal: #1d6e56;
+  --coral: #c2542d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+.page-hero { padding: 8rem 2rem 4rem; max-width: 780px; margin: 0 auto; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.page-hero h1 em { font-style: italic; color: var(--accent); }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+section { padding: 3rem 2rem 4rem; max-width: 900px; margin: 0 auto; }
+h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+h3 { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1rem; }
+p { margin-bottom: 1.2rem; font-size: 0.95rem; }
+
+.divider { height: 1px; background: var(--faint); max-width: 900px; margin: 0 auto; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--faint); margin: 0 0 3rem; }
+.stat { background: var(--white); padding: 1.5rem; }
+.stat .number { font-family: var(--serif); font-size: 2.5rem; font-weight: 400; line-height: 1; color: var(--accent); }
+.stat .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4; }
+
+.chart-wrap { position: relative; width: 100%; margin: 0 0 1rem; }
+.chart-caption { font-size: 0.8rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.5; }
+
+/* Vulnerability rows */
+.vuln-section { margin: 2rem 0 3rem; }
+.vuln-row { display: flex; align-items: center; margin-bottom: 3px; }
+.vuln-label { width: 160px; font-size: 0.75rem; text-align: right; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+.vuln-bar { height: 18px; border-radius: 2px; transition: width 0.4s ease; }
+.vuln-val { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); padding-left: 8px; width: 30px; flex-shrink: 0; }
+.vuln-disc { font-size: 0.6rem; font-family: var(--mono); color: var(--accent); padding-left: 6px; flex-shrink: 0; }
+
+footer { padding: 4rem 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--faint); margin-top: 2rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .page-hero { padding: 6rem 1.5rem 3rem; }
+  section { padding: 2rem 1.5rem 3rem; }
+  .vuln-label { width: 110px; font-size: 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,243,238,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,211,200,0.5);padding:0 2rem;display:flex;align-items:center;height:48px;font-family:var(--sans);font-size:0.8rem;">
+  <a href="index.html" style="font-family:var(--serif);font-size:1rem;color:var(--black);text-decoration:none;margin-right:auto;">Authored Craft<span style="font-family:var(--sans);font-size:0.7rem;font-weight:400;color:#8a8578;margin-left:8px;">by Ed Cotton, Inverness Consulting</span></a>
+  <a href="themes.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Themes</a>
+  <a href="frictions.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Frictions</a>
+  <a href="data.html" style="color:var(--accent);text-decoration:none;margin-left:2rem;font-weight:500;">Data</a>
+  <a href="practices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Practices</a>
+  <a href="voices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Voices</a>
+</nav>
+
+<div class="page-hero">
+  <h1>The <em>Data</em></h1>
+  <p class="subtitle">51 practices measured across geography, discipline, founding date, team size, economic model, friction mode, and AI vulnerability. The patterns tell the story.</p>
+</div>
+
+<section class="fade-in">
+  <h3>The headline numbers</h3>
+  <div class="stats">
+    <div class="stat"><div class="number">51</div><div class="label">Practices studied</div></div>
+    <div class="stat"><div class="number">9</div><div class="label">Disciplines</div></div>
+    <div class="stat"><div class="number">15</div><div class="label">Countries</div></div>
+    <div class="stat"><div class="number">41%</div><div class="label">Immigrant / diaspora founders</div></div>
+    <div class="stat"><div class="number">86%</div><div class="label">Independent / outside larger brand</div></div>
+    <div class="stat"><div class="number">~30</div><div class="label">Median team size</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>When they were founded</h3>
+  <h2>The 2000–2019 generation</h2>
+  <p>75% of entries were founded between 2000 and 2019 — the two decades between the iPhone and ChatGPT. This generation grew up alongside digital culture but before AI became generative. That window is now closed.</p>
+  <div class="chart-wrap" style="height:280px;">
+    <canvas id="decadeChart"></canvas>
+  </div>
+  <div class="chart-caption">Only 5 entries were founded in the 2020s. The pre-1990 entries — Pentagram, Wolff Olins, Miyake, Zumthor — are the elders.</div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>What they do</h3>
+  <h2>Discipline breakdown</h2>
+  <p>Fashion and Brand & Identity are the largest categories. But architecture, though only 6 entries, carries the thesis disproportionately — all three of the most AI-resistant practices are architects.</p>
+  <div class="chart-wrap" style="height:320px;">
+    <canvas id="discChart"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>AI vulnerability</h3>
+  <h2>Average vulnerability by discipline</h2>
+  <p>Food and Architecture are the most AI-resistant. Technology and Brand & Identity are the most vulnerable. The further from the physical, the closer to AI replicability.</p>
+  <div class="chart-wrap" style="height:320px;">
+    <canvas id="vulnAvgChart"></canvas>
+  </div>
+  <div class="chart-caption">Score based on four dimensions: friction mode, practitioner layer, process layer, and output layer. Lower = more resistant.</div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The full spectrum</h3>
+  <h2>Every practice, scored</h2>
+  <p>Each row is a practice. The bar length is the AI vulnerability score. Teal = resistant. Coral = vulnerable. The three architects at the top score 5. The two systems practices at the bottom score 65.</p>
+  <div class="vuln-section" id="vulnRows"></div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>How they sustain</h3>
+  <h2>Economic model</h2>
+  <p>Client services and independent are the two dominant models — together 51% of all entries. VC-backed practices are a minority (10%), and the 7 entries inside larger brands can only use three of seven friction modes.</p>
+  <div class="chart-wrap" style="height:280px;">
+    <canvas id="econChart"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The friction modes</h3>
+  <h2>Distribution across the seven modes</h2>
+  <p>The Constrained is the most common primary mode (9 practices). The modes are remarkably evenly distributed — no single mode dominates, confirming that friction takes many forms.</p>
+  <div class="chart-wrap" style="height:280px;">
+    <canvas id="modeChart"></canvas>
+  </div>
+</section>
+
+<footer>
+  <p style="margin-top:1rem;">Authored Craft — A Book of Frictions. Research conducted March 2026.</p>
+  <p style="margin-top:0.5rem;">By Ed Cotton · <a href="https://invernessconsulting.com">Inverness Consulting</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const tx = '#8a8578';
+const gc = 'rgba(0,0,0,0.05)';
+const accent = '#c2542d';
+const teal = '#1d6e56';
+const tooltipStyle = { backgroundColor:'#f5f3ee', bodyColor:'#0a0a08', titleColor:'#0a0a08', borderColor:'#d8d3c8', borderWidth:0.5, padding:8, bodyFont:{family:"'DM Sans',sans-serif",size:12}, titleFont:{family:"'DM Sans',sans-serif",size:12} };
+
+/* Decade chart */
+new Chart(document.getElementById('decadeChart'), {
+  type:'bar',
+  data:{
+    labels:['1960s','1970s','1980s','1990s','2000s','2010s','2020s'],
+    datasets:[{data:[1,3,1,3,19,19,5],backgroundColor:['#bfb8a8','#bfb8a8','#bfb8a8','#bfb8a8','#c2542d','#c2542d','#968e7e'],borderRadius:3,barThickness:32}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tooltipStyle},scales:{x:{ticks:{color:tx,font:{family:"'DM Sans'",size:11}},grid:{display:false}},y:{min:0,max:24,ticks:{stepSize:4,color:tx,font:{family:"'DM Sans'",size:10}},grid:{color:gc}}}}
+});
+
+/* Discipline chart */
+new Chart(document.getElementById('discChart'), {
+  type:'bar',
+  data:{
+    labels:['Fashion','Brand & Identity','Technology','Product & Objects','Architecture','Publishing & Media','Design Research','Food'],
+    datasets:[{data:[11,11,8,6,6,4,3,2],backgroundColor:['#c2542d','#6b5aad','#2a6fa0','#a07520','#1d6e56','#8a3560','#5a8a20','#c44040'],borderRadius:3,barThickness:24}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tooltipStyle},scales:{x:{min:0,max:14,ticks:{stepSize:2,color:tx,font:{family:"'DM Sans'",size:10}},grid:{color:gc}},y:{ticks:{color:'#0a0a08',font:{family:"'DM Sans'",size:11}},grid:{display:false}}}}
+});
+
+/* Vulnerability average by discipline */
+new Chart(document.getElementById('vulnAvgChart'), {
+  type:'bar',
+  data:{
+    labels:['Food','Architecture','Fashion','Publishing','Design Research','Product & Objects','Brand & Identity','Technology'],
+    datasets:[{data:[15,22.5,35,37.5,35,32.5,48.2,51.9],backgroundColor:function(ctx){const v=ctx.raw;return v<=20?'#1d6e56':v<=30?'#5DCAA5':v<=40?'#bfb8a8':v<=50?'#c2542d':'#993C1D';}(),borderRadius:3,barThickness:24}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{label:ctx=>'Avg vulnerability: '+ctx.raw}}},scales:{x:{min:0,max:60,ticks:{stepSize:10,color:tx,font:{family:"'DM Sans'",size:10},callback:v=>v===0?'Resistant':v===60?'Vulnerable':v},grid:{color:gc}},y:{ticks:{color:'#0a0a08',font:{family:"'DM Sans'",size:11}},grid:{display:false}}}}
+});
+
+/* Vulnerability average - fix backgroundColor */
+(function(){
+  const c = Chart.getChart('vulnAvgChart');
+  const vals = [15,22.5,35,37.5,35,32.5,48.2,51.9];
+  c.data.datasets[0].backgroundColor = vals.map(v => v<=20?'#1d6e56':v<=30?'#5DCAA5':v<=40?'#bfb8a8':v<=50?'#c2542d':'#993C1D');
+  c.update();
+})();
+
+/* Economic model chart */
+new Chart(document.getElementById('econChart'), {
+  type:'bar',
+  data:{
+    labels:['Client Services','Independent','Inside Brand','Hybrid','VC-backed','Minority Investment','Foundation','Community-funded'],
+    datasets:[{data:[14,12,7,7,5,3,2,1],backgroundColor:'#c2542d',borderRadius:3,barThickness:22}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tooltipStyle},scales:{x:{min:0,max:16,ticks:{stepSize:2,color:tx,font:{family:"'DM Sans'",size:10}},grid:{color:gc}},y:{ticks:{color:'#0a0a08',font:{family:"'DM Sans'",size:11}},grid:{display:false}}}}
+});
+
+/* Friction mode chart */
+new Chart(document.getElementById('modeChart'), {
+  type:'bar',
+  data:{
+    labels:['Constrained','Refused','Embodied','Withheld','Excavated','Orchestrated','Tested'],
+    datasets:[{data:[9,8,8,7,7,6,6],backgroundColor:['#d5cfc2','#bfb8a8','#4a4640','#f0ede6','#e8e0d0','#968e7e','#1a1918'],borderRadius:3,barThickness:28,borderWidth:1,borderColor:'#d8d3c8'}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tooltipStyle},scales:{x:{ticks:{color:tx,font:{family:"'DM Sans'",size:11}},grid:{display:false}},y:{min:0,max:12,ticks:{stepSize:2,color:tx,font:{family:"'DM Sans'",size:10}},grid:{color:gc}}}}
+});
+
+/* Full vulnerability spectrum */
+const vulnData = [
+  {n:"Peter Zumthor",s:5,d:"Arch"},{n:"Studio Mumbai",s:5,d:"Arch"},{n:"Vo Trong Nghia",s:5,d:"Arch"},
+  {n:"Visvim",s:10,d:"Fash"},{n:"Tartine",s:10,d:"Food"},
+  {n:"Satisfy",s:15,d:"Fash"},{n:"Teenage Engineering",s:15,d:"Prod"},
+  {n:"Torrisi / MFG",s:20,d:"Food"},{n:"Loose Joints",s:20,d:"Pub"},
+  {n:"APFEL",s:25,d:"Brand"},{n:"Nothing",s:25,d:"Tech"},{n:"Faye Toogood",s:25,d:"Fash"},
+  {n:"Lemaire",s:30,d:"Fash"},{n:"DixonBaxi",s:30,d:"Brand"},{n:"Lina Ghotmeh",s:30,d:"Arch"},
+  {n:"Frida Escobedo",s:30,d:"Arch"},{n:"Officine Buly",s:30,d:"Prod"},{n:"Atelier LUMA",s:30,d:"Res"},
+  {n:"Phoebe Philo",s:30,d:"Fash"},
+  {n:"Thom Browne",s:35,d:"Fash"},{n:"The Row",s:35,d:"Fash"},{n:"Issey Miyake",s:35,d:"Fash"},
+  {n:"Matthieu Blazy",s:35,d:"Fash"},{n:"Jasper Morrison",s:35,d:"Prod"},{n:"Muji / Kenya Hara",s:35,d:"Prod"},
+  {n:"Nendo",s:35,d:"Prod"},{n:"Counter Print",s:35,d:"Pub"},{n:"Formafantasma",s:35,d:"Res"},
+  {n:"Rural Studio",s:35,d:"Arch"},
+  {n:"C. Anderson",s:40,d:"Fash"},{n:"MSCHF",s:40,d:"Prod"},{n:"Kenya Hara / NDC",s:40,d:"Res"},
+  {n:"Stripe Press",s:40,d:"Pub"},{n:"Moniker",s:40,d:"Brand"},
+  {n:"Monocle",s:45,d:"Pub"},{n:"Base Design",s:45,d:"Brand"},{n:"Linear",s:45,d:"Tech"},
+  {n:"Browser Co.",s:45,d:"Tech"},{n:"Studio Lin",s:45,d:"Brand"},
+  {n:"Baby Teeth",s:50,d:"Brand"},
+  {n:"Order",s:55,d:"Brand"},{n:"Pentagram",s:55,d:"Brand"},{n:"Wolff Olins",s:55,d:"Brand"},
+  {n:"JW Anderson",s:55,d:"Fash"},{n:"Google CL",s:55,d:"Tech"},{n:"Are.na",s:55,d:"Tech"},
+  {n:"Perplexity",s:55,d:"Tech"},
+  {n:"Porto Rocha",s:60,d:"Brand"},{n:"Vercel",s:60,d:"Tech"},
+  {n:"Collins",s:65,d:"Brand"},{n:"Figma",s:65,d:"Tech"},
+];
+
+function barColor(s){return s<=10?'#0F6E56':s<=20?'#1d6e56':s<=30?'#5DCAA5':s<=40?'#bfb8a8':s<=50?'#c2542d':'#993C1D';}
+
+const vulnContainer=document.getElementById('vulnRows');
+vulnData.forEach(e=>{
+  const pct=Math.round(e.s/65*100);
+  const row=document.createElement('div');
+  row.className='vuln-row';
+  row.innerHTML=`<div class="vuln-label">${e.n}</div><div class="vuln-bar" style="width:${pct}%;background:${barColor(e.s)};"></div><div class="vuln-val">${e.s}</div>`;
+  vulnContainer.appendChild(row);
+});
+
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
