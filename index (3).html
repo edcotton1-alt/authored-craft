@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authored Craft — A Book of Frictions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --black: #0a0a08;
+  --white: #f5f3ee;
+  --cream: #ece8df;
+  --warm: #d4c5a9;
+  --accent: #c2542d;
+  --muted: #8a8578;
+  --faint: #d8d3c8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-size: 18px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(4rem + 48px) 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, var(--faint) 59px, var(--faint) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, var(--faint) 59px, var(--faint) 60px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+.hero-content { position: relative; max-width: 900px; }
+.hero h1 { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 400; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero .subtitle { font-family: var(--sans); font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); max-width: 540px; line-height: 1.6; }
+.scroll-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 3rem; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+section { padding: 5rem 2rem; max-width: 780px; margin: 0 auto; }
+h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.02em; }
+h3 { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1rem; }
+p { margin-bottom: 1.4rem; }
+p.lead { font-size: 1.25rem; line-height: 1.6; }
+.pull { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.25rem); font-style: italic; line-height: 1.3; padding: 3rem 0; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); margin: 3rem 0; }
+.pull .attr { display: block; font-family: var(--sans); font-style: normal; font-size: 0.8rem; color: var(--muted); margin-top: 1rem; letter-spacing: 0.05em; }
+.divider { height: 1px; background: var(--faint); max-width: 780px; margin: 0 auto; }
+
+section.dark { background: var(--black); color: var(--white); max-width: none; padding: 5rem 2rem; }
+section.dark .inner { max-width: 780px; margin: 0 auto; }
+section.dark h2 { color: var(--white); }
+section.dark h3 { color: var(--warm); }
+section.dark .pull { border-color: rgba(255,255,255,0.15); color: var(--white); }
+section.dark .pull .attr { color: var(--warm); }
+section.dark p { color: rgba(255,255,255,0.8); }
+
+.nav-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--faint); margin: 2rem 0; }
+.nav-card { background: var(--white); padding: 2rem; text-decoration: none; color: var(--black); transition: background 0.15s; }
+.nav-card:hover { background: var(--cream); }
+.nav-card .card-title { font-family: var(--serif); font-size: 1.25rem; margin-bottom: 0.5rem; }
+.nav-card .card-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.nav-card .card-arrow { font-size: 0.8rem; color: var(--accent); margin-top: 0.75rem; display: block; }
+
+footer { padding: 4rem 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--faint); }
+footer .closing { font-family: var(--serif); font-size: 1.5rem; font-style: italic; color: var(--black); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .hero { padding: calc(2rem + 48px) 1.5rem 4rem; }
+  section { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,243,238,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,211,200,0.5);padding:0 2rem;display:flex;align-items:center;height:48px;font-family:var(--sans);font-size:0.8rem;">
+  <a href="index.html" style="font-family:var(--serif);font-size:1rem;color:var(--black);text-decoration:none;margin-right:auto;">Authored Craft<span style="font-family:var(--sans);font-size:0.7rem;font-weight:400;color:#8a8578;margin-left:8px;">by Ed Cotton, Inverness Consulting</span></a>
+  <a href="journey.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Journey</a>
+  <a href="community.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Community</a>
+  <a href="practices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Practices</a>
+  <a href="frictions.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Frictions</a>
+  <a href="data.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Data</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Authored<br>Craft<br><em>A Book of&nbsp;Frictions</em></h1>
+    <p class="subtitle">50 global creative practices examined through the lens of deliberate friction — the resistance that produces depth in an age of instant generation.</p>
+    <div class="scroll-hint">Scroll to begin ↓</div>
+  </div>
+</div>
+
+<section class="fade-in">
+  <p style="font-size:1.15rem;line-height:1.7;">In a world where creativity is under pressure, I wanted to look outward — across disciplines, borders, and generations — to understand how different practitioners think, work, and make.</p>
+  <p style="font-size:1.15rem;line-height:1.7;">I wanted to find the themes that cross boundaries. To ask how they hold up against AI. To consider what it might look like if they united around human craft, human scale, and process.</p>
+  <p style="font-size:1.15rem;line-height:1.7;">What follows is a study of 51 practices across 9 disciplines, 15 countries, and 6 decades. It became an argument for friction.</p>
+</section>
+
+<section class="fade-in" style="max-width:1000px;">
+  <h3>Go deeper</h3>
+  <h2>The study</h2>
+  <div class="nav-cards">
+    <a href="journey.html" class="nav-card">
+      <div class="card-title">The Journey</div>
+      <div class="card-desc">Why the output is just the receipt. The bidirectional loop. The client as participant. Conviction as the product.</div>
+      <span class="card-arrow">Read →</span>
+    </a>
+    <a href="community.html" class="nav-card">
+      <div class="card-title">The Community</div>
+      <div class="card-desc">Why creativity must come together. The industrial revolution parallel. What the disciplines share. The table, not the stage.</div>
+      <span class="card-arrow">Read →</span>
+    </a>
+    <a href="frictions.html" class="nav-card">
+      <div class="card-title">The Seven Frictions</div>
+      <div class="card-desc">Seven modes of deliberate resistance — from The Withheld to The Tested. Scroll through the geological layers.</div>
+      <span class="card-arrow">Explore →</span>
+    </a>
+    <a href="practices.html" class="nav-card">
+      <div class="card-title">The 51 Practices</div>
+      <div class="card-desc">Every practice studied — filterable by discipline, with key quotes, friction modes, and AI vulnerability scores.</div>
+      <span class="card-arrow">Browse →</span>
+    </a>
+    <a href="data.html" class="nav-card">
+      <div class="card-title">The Data</div>
+      <div class="card-desc">The numbers behind the argument. Founding timelines, discipline breakdown, vulnerability spectrum, economic models.</div>
+      <span class="card-arrow">Analyse →</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="closing">"The friction is the journey. The journey is the transformation. The transformation is the value."</div>
+  <p>Authored Craft — A Book of Frictions. Research conducted March 2026.</p>
+  <p style="margin-top:0.5rem;">The friction is the point.</p>
+  <p style="margin-top:1.5rem;font-size:0.75rem;">By Ed Cotton · <a href="https://invernessconsulting.com" style="color:var(--accent);text-decoration:none;">Inverness Consulting</a></p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
