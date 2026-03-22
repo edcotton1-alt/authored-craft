@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Resistance</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f6;
+  --fg: #1c1c1a;
+  --dim: #8a8880;
+  --faint: #c8c4bc;
+  --accent: #b33a2a;
+  --card-bg: #f3f1ec;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--faint);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.nav-title {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.site-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--fg);
+  opacity: 0.6;
+}
+.landing-icon {
+  margin-bottom: 1.5rem;
+}
+.landing-icon svg {
+  width: 52px;
+  height: 52px;
+  color: var(--fg);
+  opacity: 0.5;
+}
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.nav-tab {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  color: var(--dim);
+  transition: color 0.15s;
+  font-weight: 400;
+}
+.nav-tab:hover { color: var(--fg); }
+.nav-tab.active {
+  color: var(--fg);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* LANDING */
+.landing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6vh 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+}
+.landing h1 {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  max-width: 700px;
+}
+.landing h1 em {
+  font-style: italic;
+  font-weight: 400;
+}
+.landing-links {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.landing-link {
+  font-size: 1rem;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.3rem 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  transition: color 0.15s;
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  text-align: left;
+  font-weight: 400;
+}
+.landing-link:hover { color: var(--accent); }
+.landing-link .num {
+  font-size: 0.65rem;
+  color: var(--dim);
+  min-width: 1.5rem;
+}
+.landing-meta {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--faint);
+  font-size: 0.7rem;
+  color: var(--dim);
+  line-height: 1.8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.landing-text {
+  margin-top: 2.5rem;
+  max-width: 540px;
+}
+.landing-text p {
+  font-size: 0.82rem;
+  color: var(--fg-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+  font-weight: 300;
+}
+.landing-text p:last-child {
+  margin-bottom: 0;
+}
+.landing-divider {
+  width: 32px;
+  height: 1px;
+  background: var(--faint);
+  margin: 2rem 0;
+}
+.landing-essay {
+  max-width: 540px;
+}
+.landing-essay p {
+  font-size: 0.82rem;
+  color: var(--fg);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+  font-weight: 300;
+}
+.landing-essay p:first-child {
+  font-weight: 400;
+}
+.landing-essay p:last-child {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.landing-text-lower {
+  max-width: 540px;
+}
+.landing-text-lower p {
+  font-size: 0.82rem;
+  color: var(--fg-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+  font-weight: 300;
+}
+.landing-text-lower p:last-child {
+  color: var(--fg);
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+/* THEME PAGE */
+.theme-page {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+.theme-page.active { display: block; }
+
+.theme-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--faint);
+}
+.theme-header h2 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+.theme-header p {
+  font-size: 0.85rem;
+  color: var(--dim);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+.cluster {
+  margin-bottom: 3rem;
+}
+.cluster-head {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--faint);
+}
+.cluster-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  color: var(--fg);
+  opacity: 0.7;
+  margin-top: 0.1rem;
+}
+.cluster-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  font-weight: 500;
+}
+.cluster-desc {
+  font-size: 0.8rem;
+  color: var(--dim);
+  margin-top: 0.25rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+/* standalone cluster-label (pages not yet updated with icons) */
+.cluster > .cluster-label {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--faint);
+}
+.cluster-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.entry-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  padding: 0.6rem 0;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-bottom: 1px solid transparent;
+}
+.entry-row:hover {
+  background: var(--card-bg);
+  margin: 0 -0.75rem;
+  padding: 0.6rem 0.75rem;
+}
+.entry-name {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.entry-note {
+  font-size: 0.8rem;
+  color: var(--dim);
+  font-weight: 300;
+}
+
+/* MODAL */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28,28,26,0.5);
+  z-index: 200;
+  overflow-y: auto;
+}
+.modal-bg.open { display: block; }
+.modal-panel {
+  max-width: 640px;
+  margin: 6vh auto;
+  background: var(--bg);
+  padding: 3rem 2.5rem;
+  position: relative;
+  border: 1px solid var(--faint);
+}
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--dim);
+  cursor: pointer;
+}
+.modal-close:hover { color: var(--fg); }
+.modal-name {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+.modal-discipline {
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+}
+.modal-section {
+  margin-bottom: 1.5rem;
+}
+.modal-section-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  margin-bottom: 0.4rem;
+}
+.modal-section p {
+  font-size: 0.85rem;
+  color: var(--fg);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.modal-quote {
+  margin-top: 2rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--fg);
+}
+.modal-themes {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.modal-theme-tag {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.6rem;
+  background: var(--card-bg);
+  color: var(--dim);
+  cursor: pointer;
+}
+.modal-theme-tag:hover { color: var(--accent); }
+
+@media (max-width: 700px) {
+  .entry-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .nav-inner { padding: 1rem; }
+  .modal-panel { margin: 2vh 1rem; padding: 2rem 1.5rem; }
+  .landing { padding: 6vh 1.5rem; }
+  .dir-table td:nth-child(3) { display: none; }
+}
+
+/* CONSTELLATION — PAIR GENERATOR */
+.pair-container {
+  margin-top: 2rem;
+}
+.pair-cards {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+  min-height: 300px;
+}
+.pair-card {
+  padding: 1.5rem;
+  border: 1px solid var(--faint);
+}
+.pair-card .pc-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.pair-card .pc-discipline {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  margin-bottom: 1.2rem;
+}
+.pair-card .pc-detail {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--fg-secondary);
+  font-weight: 300;
+}
+.pair-shared {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.2rem;
+  min-width: 160px;
+  text-align: center;
+}
+.pair-shared .ps-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  margin-bottom: 0.5rem;
+}
+.pair-shared .ps-theme {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.pair-shared .ps-cluster {
+  font-size: 0.75rem;
+  color: var(--fg-secondary);
+  font-weight: 300;
+}
+.pair-btn {
+  display: block;
+  margin: 2.5rem auto 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.6rem 2rem;
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: opacity 0.15s;
+}
+.pair-btn:hover { opacity: 0.8; }
+@media(max-width:700px){
+  .pair-cards { grid-template-columns: 1fr; }
+  .pair-shared { padding: 1rem; }
+}
+
+/* FOOTER */
+.site-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 3rem;
+  border-top: 1px solid var(--faint);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+}
+
+/* DIRECTORY TABLE */
+.dir-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dir-table thead th {
+  text-align: left;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--fg);
+  font-weight: 400;
+}
+.dir-table tbody tr {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.dir-table tbody tr:hover { background: var(--card-bg); }
+.dir-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--faint);
+  font-size: 0.8rem;
+  vertical-align: top;
+}
+.dir-table td:first-child {
+  font-weight: 500;
+  width: 280px;
+}
+.dir-table td:nth-child(2) {
+  color: var(--dim);
+  width: 200px;
+}
+.dir-themes {
+  font-size: 0.7rem;
+  color: var(--dim);
+  font-weight: 300;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title"><svg class="site-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M4 16 Q8 8 16 6 Q24 8 28 16"/><path d="M6 16 Q10 11 16 10 Q22 11 26 16"/><path d="M8 16 Q11 13.5 16 13 Q21 13.5 24 16"/><path d="M4 16 Q8 24 16 26 Q24 24 28 16"/><path d="M6 16 Q10 21 16 22 Q22 21 26 16"/><path d="M8 16 Q11 18.5 16 19 Q21 18.5 24 16"/></svg>The Creative Resistance</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showLanding()">Index</button>
+      <button class="nav-tab" onclick="showTheme('backwards')">(Re)Sources</button>
+      <button class="nav-tab" onclick="showTheme('partnership')">Partnership</button>
+      <button class="nav-tab" onclick="showTheme('outsiders')">Outsiders</button>
+      <button class="nav-tab" onclick="showTheme('frictions')">Frictions</button>
+      <button class="nav-tab" onclick="showTheme('rituals')">Rituals</button>
+      <button class="nav-tab" onclick="showTheme('originality')">Origins</button>
+      <button class="nav-tab" onclick="showTheme('directory')">A–Z</button>
+      <button class="nav-tab" onclick="showTheme('constellation')">Constellation</button>
+    </div>
+  </div>
+</nav>
+
+<!-- LANDING -->
+<div class="landing" id="landing">
+  <div class="landing-icon"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M6 40 Q14 18 40 12 Q66 18 74 40"/><path d="M10 40 Q17 22 40 17 Q63 22 70 40"/><path d="M15 40 Q21 27 40 23 Q59 27 65 40"/><path d="M20 40 Q25 31 40 28 Q55 31 60 40"/><path d="M6 40 Q14 62 40 68 Q66 62 74 40"/><path d="M10 40 Q17 58 40 63 Q63 58 70 40"/><path d="M15 40 Q21 53 40 57 Q59 53 65 40"/><path d="M20 40 Q25 49 40 52 Q55 49 60 40"/></svg></div>
+  <h1>The Creative<br><em>Resistance</em></h1>
+
+  <div class="landing-text">
+    <p>I wanted to take a look at 50 creative practitioners. To break down the silos and explore the essence of creativity across domains. Fashion designers, architects, bakers, game designers, photographers, type designers, publishers, musicians, choreographers, technologists.</p>
+
+    <p>To not focus on the media obsession, which is the output, but instead dig deeper into the practice, the process, and the personalities.</p>
+
+    <p>I wanted to learn about how they work, not what they make, but how and why they make it. The answers came from primary sources, podcasts, long-form interviews, profiles, and their own words. What they said, in the places they chose to say it.</p>
+
+    <p>Then I collapsed all the answers. And looked for the commonalities and themes that crossed disciplines.</p>
+  </div>
+
+  <div class="landing-divider"></div>
+
+  <div class="landing-text-lower">
+    <p>What connects these disparate creative practitioners? Six themes emerged.</p>
+
+    <p>1. How they draw from sources and resources that often predate them.<br>
+    2. The importance of partnership.<br>
+    3. The value of being outside and outsiders.<br>
+    4. Resistance is what makes them and what allows them to create.<br>
+    5. Rituals are how they hone craft and how they find space.<br>
+    6. How they are shaped by their origins.</p>
+
+    <p>A fashion designer in London, a baker in San Francisco and a game designer in Tokyo, and a choreographer in Athens are doing the same thing. The disciplines are different, but the patterns are the same.</p>
+
+    <p>Across 50 practitioners and a dozen disciplines, the same move keeps appearing. Not a style, not an aesthetic, not a manifesto. A structural decision. They make the work slower when the culture wants it faster. Smaller when the market wants it bigger. More personal when the platform wants it to be frictionless. They protect the conditions under which the work stays authored. That protection, patient, deliberate, often invisible, is the creative resistance. It isn't ideology. It's how the work survives. This is what Creative Resistance looks like.</p>
+  </div>
+</div>
+
+<!-- THEME: LOOKING BACKWARDS -->
+<div class="theme-page" id="page-backwards">
+  <div class="theme-header">
+    <h2>(Re)Sources</h2>
+    <p>The past isn't nostalgia. It's raw material. The archive, the technique, the biography, the commitment — four ways of using what already exists.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="8" y="6" width="32" height="36" rx="1" style="transform: rotate(-1deg); transform-origin: center;" />
+        <line x1="14" y1="14" x2="34" y2="14.5" />
+        <line x1="14" y1="20" x2="30" y2="20.8" />
+        <line x1="14" y1="26" x2="32" y2="26.3" />
+        <path d="M14 32 Q22 33 28 31.5" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Literal Archive</div>
+        <div class="cluster-desc">Finding physical objects and documents. The answer is in a basement, a drawer, behind a wall.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('reed')"><div class="entry-name">Order / Jesse Reed</div><div class="entry-note">Found the NYCTA manual in Pentagram's basement while looking for a tarp. Gage & Tolner's 1879 signage behind Arby's fake walls. "The answer is always in what already exists."</div></div>
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">Goes to the Letterform Archive. Went back to original 1950s hand-drawings of Neue Haas Grotesk for the Freeform project. "How far can you push it before it snaps?"</div></div>
+      <div class="entry-row" onclick="openModal('walesbonner')"><div class="entry-name">Wales Bonner</div><div class="entry-note">Research as artistic practice. Academic citations in fashion collections. Lineage as method. The library is the studio.</div></div>
+      <div class="entry-row" onclick="openModal('formafantasma')"><div class="entry-name">Formafantasma</div><div class="entry-note">Material archaeology. Bringing scientists and historians into design process. The history of a material IS the design brief.</div></div>
+      <div class="entry-row" onclick="openModal('brule')"><div class="entry-name">Brûlé / Monocle</div><div class="entry-note">Built a magazine by travelling to the places, meeting the people, documenting what's already there. Physical retail, radio, cafes — the archive is the world itself, walked through and recorded.</div></div>
+      <div class="entry-row" onclick="openModal('brown')"><div class="entry-name">Cecily Brown</div><div class="entry-note">A magpie. Copies Hogarth, Snyders, Munch, Fragonard, Manet. "I don't really know a work of art til I've copied it." Rubbishy printouts, phone screenshots, reversed Old Masters. The copy IS the method of knowing.</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Mind-maps. Cinema, fine art, TikTok memes, kitsch, ceramics — everything fed into the work. Collects Arts and Crafts. Curates exhibitions. Brings craftspeople into the fashion system. The archive isn't referenced — it's installed.</div></div>
+      <div class="entry-row" onclick="openModal('torrisi')"><div class="entry-name">Torrisi / MFG</div><div class="entry-note">Italian-American food from their own childhoods treated with fine-dining rigor. The former Rocco space became Carbone — neon sign over the original, honoring the history. The past isn't nostalgia. It's the architecture of the restaurant.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M24 42 Q24 30 18 24 Q12 18 14 10 Q15 8 18 9 Q20 10 22 14" />
+        <path d="M24 42 Q24 30 22 22 Q21 16 22 10 Q23 8 24 9" />
+        <path d="M24 42 Q24 30 28 24 Q32 18 33 10 Q32 8 30 9 Q28 10 26 14" />
+        <path d="M24 42 Q25 32 32 26 Q36 24 38 16 Q37 14 35 15" />
+        <path d="M24 42 Q23 32 16 26 Q12 24 10 16 Q11 14 13 15" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Inherited Technique</div>
+        <div class="cluster-desc">Craft knowledge passed through hands, body to body. Skills that predate the maker by centuries.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">Moccasins from the Sami people. Navajo blankets. Edo-period kimonos. Vegetable tanning, not chrome. Mud-dyed Amami Oshima. 22 years asking: what's underneath the surface?</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">6-year grain breeding project with Washington State. Stone mill and roller mill on the same line — "put together the wrong way on purpose." Backyard wood-fired oven at 3am.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">"The unsung heroes of workwear and military wear. The unknown pattern cutters who worked at Levi's. That's real design." Who designed the first trench coat?</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">Community labor traditions from Gando. Ventilation techniques. Local clay fired by local hands. The village builds the school the way villages have always built.</div></div>
+      <div class="entry-row" onclick="openModal('vonghia')"><div class="entry-name">Vo Trong Nghia</div><div class="entry-note">Bamboo as ancient Vietnamese building material. 1,000 days of meditation in Myanmar — an inherited practice applied to architecture.</div></div>
+      <div class="entry-row" onclick="openModal('browne')"><div class="entry-name">Thom Browne</div><div class="entry-note">Savile Row tailoring techniques applied to proportions nobody asked for. The tradition is the foundation he warps.</div></div>
+      <div class="entry-row"><div class="entry-name">CAMP Mumbai / Bijoy Jain</div><div class="entry-note">Preindustrial building methods. Local stone, local hands, no separation between drawing and making. The craftsmen don't execute plans — they co-design in real time. The technique IS the architecture.</div></div>
+      <div class="entry-row" onclick="openModal('zumthor')"><div class="entry-name">Peter Zumthor</div><div class="entry-note">Aunt's door handle. The memory of touching it as a child — the temperature of the brass, the weight, the sound of the latch. 20-year buildings designed for body memory. "Atmospheres" as inherited sensory knowledge.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <ellipse cx="24" cy="24" rx="14" ry="16" style="transform: rotate(2deg); transform-origin: center;" />
+        <line x1="16" y1="10" x2="16" y2="38" style="transform: rotate(-1deg); transform-origin: center;" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Personal Past</div>
+        <div class="cluster-desc">Their own biography as source material. The childhood, the loss, the first encounter — mined and remade.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('devlin')"><div class="entry-name">Es Devlin</div><div class="entry-note">Model of Rye at 6. Music school corridor at 11. Every stage sculpture since is a 28-year extension of that corridor.</div></div>
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">Child stardom, Dualstar, $1.2B in licensing — the archive they design against. The Row is the anti-Full House: durable, silent, authorless.</div></div>
+      <div class="entry-row" onclick="openModal('philo')"><div class="entry-name">Phoebe Philo</div><div class="entry-note">"One continuous collection." Her own work at Chloé and Céline IS the source material. The eponymous label is the archive made personal.</div></div>
+      <div class="entry-row" onclick="openModal('tyler')"><div class="entry-name">Tyler, the Creator</div><div class="entry-note">Samples old jazz, funk, soul. Camp Flog Gnaw references carnival history. Childhood obsessions (Pharrell, skate culture) become the empire's foundation.</div></div>
+      <div class="entry-row" onclick="openModal('ghotmeh')"><div class="entry-name">Ghotmeh</div><div class="entry-note">Mother's architecture diploma during the Lebanese civil war. Bombing outside the exam room. Stone Garden is archaeology of the future built from personal history.</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Grandfather was a textile designer. Northern Ireland textile heritage runs through Loewe and Dior. The Troubles as biographical material.</div></div>
+      <div class="entry-row" onclick="openModal('kojima')"><div class="entry-name">Kojima</div><div class="entry-note">Parents' nightly film-watching ritual — not allowed to bed until the movie finished. That ritual became a lifetime of obsessive cultural consumption. Books, films, music all become source material. The Creative Gene maps every influence back to his own biography.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M10 24 Q14 22 18 24 Q22 26 26 24 Q30 22 34 24 Q38 26 42 24" style="transform: translateY(-6px);" />
+        <path d="M10 24 Q14 22 18 24 Q22 26 26 24 Q30 22 34 24 Q38 26 42 24" />
+        <path d="M10 24 Q14 22 18 24 Q22 26 26 24 Q30 22 34 24 Q38 26 42 24" style="transform: translateY(6px);" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Long Commitment</div>
+        <div class="cluster-desc">Staying with one thing until it becomes an archive of itself. Time as material.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('broskoski')"><div class="entry-name">Are.na / Broskoski</div><div class="entry-note">Named the company "When It Changed" (William Gibson). Aspires to become a 1,300-year-old Japanese hot spring hotel. 15 years building one tool.</div></div>
+      <div class="entry-row" onclick="openModal('sato')"><div class="entry-name">Nendo / Sato</div><div class="entry-note">Shikinen Sengu: Ise Grand Shrine rebuilt every 20 years. No blueprints — only techniques passed down. "Not passing down things, but techniques."</div></div>
+      <div class="entry-row" onclick="openModal('loosejoints')"><div class="entry-name">Loose Joints</div><div class="entry-note">Moved to Marseille. Pace over proximity. The photobook as slow object in a fast world.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Conditional Design manifesto (2000s) → Designing Friction statement (2020s). Same question, refined over 15 years. The manifestos are the archive.</div></div>
+      <div class="entry-row" onclick="openModal('satisfy')"><div class="entry-name">Satisfy / Partouche</div><div class="entry-note">Running is the oldest human movement. The brand's entire archive is the daily run — repeated thousands of times, never the same.</div></div>
+      <div class="entry-row" onclick="openModal('brule')"><div class="entry-name">Brûlé / Monocle</div><div class="entry-note">20+ years building one editorial world. Magazine, radio, retail, cafes — the same vision extended into every medium. The commitment IS the brand.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: PARTNERSHIP -->
+<div class="theme-page" id="page-partnership">
+  <div class="theme-header">
+    <h2>Partnership</h2>
+    <p>Not who the partners are. What the partnership produces that wouldn't exist without it.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M8 36 Q12 20 24 14 Q36 20 40 36" />
+        <path d="M24 14 L24 6" />
+        <path d="M20 8 L24 4 L28 8" />
+      </svg>
+      <div>
+        <div class="cluster-label">Permission</div>
+        <div class="cluster-desc">The partner gives you permission to do something you couldn't justify alone.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Galliano arrived at his Dior show with Tesco food and wild cyclamen from his garden. The flowers became a motif of the couture collection. The older designer gave the younger one permission to let the accidental in.</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">Bianco said "Brother, can I just be a part of all of it?" — and then reimagined Robertson's bread dough as flatbread pizza. 25 years of friendship gave both permission to cross into each other's territory.</div></div>
+      <div class="entry-row" onclick="openModal('herndon')"><div class="entry-name">Herndon / Dryhurst</div><div class="entry-note">Holly makes the music, Mat builds the infrastructure. The AI choir — rebuilding communal singing through technology — requires both a musician and a systems thinker. Neither could justify it alone.</div></div>
+      <div class="entry-row" onclick="openModal('fox')"><div class="entry-name">Toby Fox</div><div class="entry-note">Couldn't crack the OFF battle theme alone. "Summoned Camellia" to re-remix his track. Even the most solo-authored practitioner in the document needed permission to let someone else in.</div></div>
+      <div class="entry-row" onclick="openModal('verdy')"><div class="entry-name">Verdy</div><div class="entry-note">Girls Don't Cry, Wasted Youth. Gives away more than he sells. The community gives the brand permission to exist — he can't make it without them wearing it, sharing it, believing in it.</div></div>
+      <div class="entry-row" onclick="openModal('saarinen')"><div class="entry-name">Saarinen / Linear</div><div class="entry-note">Three Finnish friends met every Wednesday at a corner table in a bar for almost a year. Brought their computers, talked about what they learned. The permission came from each other — shared frustration, shared taste, shared calm. Then they quit their jobs.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M10 34 Q18 34 24 24 Q30 14 38 14" />
+        <path d="M10 14 Q18 14 24 24 Q30 34 38 34" />
+      </svg>
+      <div>
+        <div class="cluster-label">Correction</div>
+        <div class="cluster-desc">The partner sees what you can't. Completes the blind spot. Changes the trajectory.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">Fraternal twins who finish each other's sentences and correct each other in real time. "Wait, can I answer the question first, then we can ask it." The correction IS the conversation. Neither edits without the other.</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha</div><div class="entry-note">Leo says "agency," Felipe keeps saying "studio." Leo is strategy-driven, Felipe is instinct-driven. "If it was just Felipe and I, we would have run out of fuel." The difference sustains it.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">Can't cut patterns. Sarah-Linh Tran became co-artistic director in 2014. The partnership transformed the label — not because she fills his gap, but because two perspectives on "chic and utilitarian" are richer than one.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Luna brings dance and physical movement. Roel brings systems and technology. Deep Soup needed both — the embodied and the structural. "She said it very well. It was very well put, Luna."</div></div>
+      <div class="entry-row" onclick="openModal('nerihu')"><div class="entry-name">Neri&Hu</div><div class="entry-note">Architecture practice built on marriage. Lyndon Neri and Rossana Hu. Two cultural backgrounds — the correction is built into the domestic life that produces the work.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="16" cy="24" r="3" />
+        <circle cx="24" cy="18" r="2.5" />
+        <circle cx="32" cy="24" r="2" />
+        <circle cx="20" cy="30" r="2" />
+        <circle cx="28" cy="32" r="2.5" />
+        <circle cx="24" cy="24" r="1.5" />
+        <circle cx="36" cy="18" r="1.5" />
+        <circle cx="12" cy="18" r="1.5" />
+      </svg>
+      <div>
+        <div class="cluster-label">Scale</div>
+        <div class="cluster-desc">The partner makes the work bigger than one person's output. The group becomes the author.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">"Nothing great is made alone." Names every team member on every project. Both parents died — "my team accelerated while I was gone. I should go away more often." The team IS the practice.</div></div>
+      <div class="entry-row" onclick="openModal('sato')"><div class="entry-name">Nendo / Sato</div><div class="entry-note">"Like a soccer game with elementary school kids, where everyone is swarming around one ball." Deliberately rejected hierarchy. The Japan Pavilion required architects, interior designers, and content teams all in every meeting.</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">The community builds the school. The labor is the architecture. The builder and the user are the same person. Scale isn't size — it's participation.</div></div>
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">"Artisans are treasures to me. My role as a designer is to connect them with the market." Many different artisans in every product. The scale comes from the network of hands, not the size of the company.</div></div>
+      <div class="entry-row"><div class="entry-name">CAMP Mumbai</div><div class="entry-note">Architect and craftsmen as equal partners. The builders aren't executing a drawing — they're co-designing in real time. The building emerges from the conversation between hand and plan.</div></div>
+      <div class="entry-row" onclick="openModal('field')"><div class="entry-name">Dylan Field / Figma</div><div class="entry-note">"Nothing great is made alone" — written by Collins for Figma, but it describes the product itself. A tool whose entire purpose is making collaboration the default.</div></div>
+      <div class="entry-row"><div class="entry-name">Baby Teeth</div><div class="entry-note">Collective publishing model. Multiple voices, shared identity. No single editor-hero — the collective IS the author. The scale comes from erasing the individual byline.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="6" y1="24" x2="42" y2="24" />
+        <line x1="6" y1="23" x2="6" y2="25" />
+        <line x1="42" y1="23" x2="42" y2="25" />
+      </svg>
+      <div>
+        <div class="cluster-label">Duration</div>
+        <div class="cluster-desc">The partner keeps you going when you'd stop. The relationship outlasts any single project.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Robertson / Bianco</div><div class="entry-note">25 years. Met when both were selling illicit handmade food — Robertson illegal bread from a backyard, Bianco illegal mozzarella. The friendship predates both businesses and will outlast them.</div></div>
+      <div class="entry-row" onclick="openModal('devlin')"><div class="entry-name">Es Devlin</div><div class="entry-note">28 years of collaborators across music, theater, opera, architecture. No single partnership — a web of relationships that sustains a practice across three decades. The collaborators become the medium.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Studio dissolved two years ago. Luna and Roel maintain individual practices now. But Deep Soup took 5 years and they made it together anyway. The collaboration outlasted the company.</div></div>
+      <div class="entry-row" onclick="openModal('reed')"><div class="entry-name">Order / Reed + Smyth</div><div class="entry-note">Started Standards Manual as a side project at Pentagram. Did it nights and weekends for years. Hamish left first, Jesse six months later. The partnership survived the leap from employment to independence.</div></div>
+      <div class="entry-row" onclick="openModal('loosejoints')"><div class="entry-name">Loose Joints</div><div class="entry-note">Lewis Chaplin built the publishing house around long-term relationships with photographers. The roster IS the practice. The books emerge from years of trust, not one-off commissions.</div></div>
+      <div class="entry-row" onclick="openModal('torrisi')"><div class="entry-name">Torrisi / MFG</div><div class="entry-note">Rich Torrisi and Mario Carbone. Rejected as "kids" for the Vesuvio space. The rejection bonded them. Two people told no, who built an empire because neither would quit while the other was still going.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: OUTSIDERS -->
+<div class="theme-page" id="page-outsiders">
+  <div class="theme-header">
+    <h2>Outsiders</h2>
+    <p>Not-belonging isn't overcome. It's the vantage point. Four types.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="6" y1="24" x2="19" y2="24.3" />
+        <line x1="29" y1="23.7" x2="42" y2="24" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Immigrant</div>
+        <div class="cluster-desc">Physically moved between worlds. The gap in the border is where they passed through.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('sato')"><div class="entry-name">Nendo / Sato</div><div class="entry-note">Born in Canada, arrived in Japan at 11. Sees what Japanese people take for granted — mechanical pencils, erasers that collect shavings, candy lids that reseal. "The things they take for granted are cool."</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha</div><div class="entry-note">Both from São Paulo to New York. Spent years trying to copy European style before realizing: "What is special about our work is that we come from a place with different references."</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">Sent away from Gando at 7. Educated in Germany. Returns to build for the village that sent him away. The crossing goes both directions.</div></div>
+      <div class="entry-row" onclick="openModal('walesbonner')"><div class="entry-name">Wales Bonner</div><div class="entry-note">Mixed-race, separated parents, bus rides across south London. Between worlds became the method. The in-between is the position, not the problem.</div></div>
+      <div class="entry-row" onclick="openModal('perron')"><div class="entry-name">Willo Perron</div><div class="entry-note">Cultural loneliness in Montreal, crossing every world alone — music, fashion, architecture, retail. Confluence as design method. "The gap tooth is the personality."</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">Texas → Northern California → San Francisco → LA → Seoul. No fixed home, exchange students as childhood friends. "I don't really have like a home in my mind." Every new city becomes home through the bakery.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="12" y="8" width="24" height="32" rx="1" style="transform: rotate(0.5deg); transform-origin: center;" />
+        <path d="M20 40 L28 8" stroke-width="1.2" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Wrong Room</div>
+        <div class="cluster-desc">Entered through a door meant for someone else. The wrong discipline, the wrong training, the wrong instinct.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">Wanted to animate for Disney. Became a graphic designer instead. Brought animation INTO design — the wrong room became the new room.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">Never learned pattern cutting. Started at 19, tried pattern school, had to stop — "it was unrealistic." His biggest regret became his sharpest edge. Perfects what his eye can do because his hands can't.</div></div>
+      <div class="entry-row" onclick="openModal('escobedo')"><div class="entry-name">Escobedo</div><div class="entry-note">Too shy for art. Chose architecture as "safer." Made recessive buildings that don't impose — the shyness became the architecture.</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha / Felipe</div><div class="entry-note">"If there wasn't homophobia in Brazil, I would have pursued a career as a dancer." Design was the allowed substitute. The wrong room, but the creative energy found a way through.</div></div>
+      <div class="entry-row" onclick="openModal('reed')"><div class="entry-name">Order / Jesse Reed</div><div class="entry-note">"Had no idea what Pentagram was in college." Professor mentioned Michael Bierut, a past student. Reed tried to emulate his work without knowing the landscape. The ignorance was the advantage — no reverence, just appetite.</div></div>
+      <div class="entry-row" onclick="openModal('fp')"><div class="entry-name">Floating Points</div><div class="entry-note">PhD in neuroscience of pain at UCL. The wrong room for a musician — but the scientific training shaped music that stores feeling as data, emotion as precision.</div></div>
+      <div class="entry-row" onclick="openModal('perplexity')"><div class="entry-name">Perplexity / Escha Vera</div><div class="entry-note">Runs a record label. Makes art. "I left Descript and I kind of felt like maybe my career is over." First day at Perplexity — no design system, handed keys to Comet browser. A record label person in a tech company. Built the system from scratch.</div></div>
+      <div class="entry-row" onclick="openModal('anderson_c')"><div class="entry-name">Christopher Anderson</div><div class="entry-note">NBA injury ended a basketball career. The spatial intelligence from the court — reading movement, anticipating position — became the camera eye. The wrong room for an athlete. The right room for a photographer.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="24" cy="24" r="14" style="transform: rotate(-2deg); transform-origin: center;" />
+        <line x1="14" y1="14" x2="34" y2="34" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Uninvited</div>
+        <div class="cluster-desc">Wasn't supposed to be here at all. No access, no invitation, no precedent.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('vally')"><div class="entry-name">Sumayya Vally</div><div class="entry-note">Born in an Apartheid-designated township, 4 days after Mandela's release. "Architecture told us what we deserved." Youngest architect ever commissioned for the Serpentine Pavilion.</div></div>
+      <div class="entry-row" onclick="openModal('mschf')"><div class="entry-name">MSCHF</div><div class="entry-note">Rural North Carolina. No TV, no movies, no music. West Point dropout. Critiquing a culture they were never inside. The distance is the clarity.</div></div>
+      <div class="entry-row" onclick="openModal('gaggan')"><div class="entry-name">Gaggan Anand</div><div class="entry-note">Wanted to be a drummer. Poverty ended that. Entered cooking for survival, not passion. Progressive Indian cuisine became the rebellion against every institution that said he didn't belong.</div></div>
+      <div class="entry-row" onclick="openModal('torrisi')"><div class="entry-name">Torrisi / MFG</div><div class="entry-note">Rejected as "kids" for the Vesuvio space. Italian-American fine dining wasn't taken seriously. Built an empire from the cuisine the establishment dismissed.</div></div>
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">Celebrity teenagers entering high fashion. Julie Gilhart at Barneys was "hesitant" about stocking them. "It sold out immediately because it was good product. From the beginning they broke all the rules."</div></div>
+      <div class="entry-row" onclick="openModal('seals')"><div class="entry-name">Tré Seals</div><div class="entry-note">Brain tumors at age 4. Drawing as pain relief. No path to type design — built one. Historical justice through letterforms nobody had made before.</div></div>
+      <div class="entry-row" onclick="openModal('tyler')"><div class="entry-name">Tyler, the Creator</div><div class="entry-note">Weird kid mocked for liking Jamiroquai. Never met his father. No invitation to any scene. Built every scene himself — music, fashion, festival, TV, brand.</div></div>
+      <div class="entry-row" onclick="openModal('arnold')"><div class="entry-name">Daniel Arnold</div><div class="entry-note">Self-taught photographer. No credentials, no MFA, no gallery representation. Depression as release valve. Loneliness in a new city. Walked 8 hours a day until the city became his.</div></div>
+      <div class="entry-row" onclick="openModal('browne')"><div class="entry-name">Thom Browne</div><div class="entry-note">No fashion education. Failed actor. Sold his car to get to New York. Made five suits and wore them on the street. People were horrified. No invitation to the fashion world — built his own entrance.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="14" y1="8" x2="14" y2="40" />
+        <line x1="14" y1="8" x2="34" y2="8" />
+        <line x1="14" y1="40" x2="34" y2="40" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Self-Exile</div>
+        <div class="cluster-desc">Chose to leave. The door is open because they opened it themselves.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('philo')"><div class="entry-name">Phoebe Philo</div><div class="entry-note">Left Céline in 2018. Could have stayed — chose not to. Returned on her own terms: no shows, no seasons, no storytelling, majority owner. The departure was the design decision.</div></div>
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">No TV, no newspapers, no movies — "nothing commercial." Lives in an Edo-period house. Goes barefoot. The self-exile is daily: he removes himself from the commercial world to see clearly.</div></div>
+      <div class="entry-row" onclick="openModal('broskoski')"><div class="entry-name">Are.na / Broskoski</div><div class="entry-note">Builds against the attention economy that employs every other tech founder. Delaware C Corp named "When It Changed." Aspires to a 1,300-year-old hot spring. The exile is from the industry's own logic.</div></div>
+      <div class="entry-row" onclick="openModal('loosejoints')"><div class="entry-name">Loose Joints</div><div class="entry-note">Left London for Marseille after Brexit destroyed European economics. Pace over proximity. The photobook as an act of choosing distance.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Dissolved the studio. Luna and Roel maintain individual practices now. The dissolution wasn't failure — it was a design decision. "Take off your headset."</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Off social media entirely. Stays home in silence doing laundry and gardening. The creative director of two major houses who exiles himself from the world those houses serve.</div></div>
+      <div class="entry-row" onclick="openModal('brule')"><div class="entry-name">Brûlé / Monocle</div><div class="entry-note">Canadian in Zurich. Moved the business out of London after Brexit. "Sitting in Zurich, the continent moves further away from the UK, further from the United States. There is an Anglo narrative of how we see the world." Chose to see from outside it.</div></div>
+      <div class="entry-row" onclick="openModal('papaioannou')"><div class="entry-name">Dimitris Papaioannou</div><div class="entry-note">Ran away at 18. Painter who left painting for silent theater — images not words. Left Greece, left his discipline, left language itself. The exile is total.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: FRICTIONS -->
+<div class="theme-page" id="page-frictions">
+  <div class="theme-header">
+    <h2>Frictions</h2>
+    <p>What they fear isn't failure. It's not being true to themselves, being governed by the rules of the system, and things becoming too easy and convenient.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M8 24 L14 20 L18 28 L22 18 L26 30 L30 16 L34 26 L40 22" />
+      </svg>
+      <div>
+        <div class="cluster-label">Ease</div>
+        <div class="cluster-desc">Pushing against things becoming too easy, too comfortable, too frictionless. The removal of effort removes the reason to engage.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">"All these concepts that come along with AI is all about comfort and ease. You don't have to sweat anymore. This mindset is not how we get connected in the world." Wrote a whole manifesto for friction.</div></div>
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">"If you stay in an inorganic space for a long time, your senses become numb." No TV, no newspapers, no movies. Drives a 1963 car that breaks down constantly. The inconvenience is the point.</div></div>
+      <div class="entry-row" onclick="openModal('broskoski')"><div class="entry-name">Are.na / Broskoski</div><div class="entry-note">Won't optimize for engagement. 15 years protecting conditions for active attention — building the opposite of what every other platform builds. The slow tool in the fast economy.</div></div>
+      <div class="entry-row" onclick="openModal('vonghia')"><div class="entry-name">Vo Trong Nghia</div><div class="entry-note">"I can meditate eight hours a day, to spend one hour doing good architecture." The 8:1 ratio is the resistance. Ease would destroy the ratio.</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">6 years developing grain before using it. Could have bought commercial flour. Chose to wait for the grain to be ready. "We never mastered this."</div></div>
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">"AI has eliminated the craft mode that used to separate creators from non-creators. That mode is gone." The easy path now produces polished mediocrity. Excellence requires what ease cannot give.</div></div>
+      <div class="entry-row" onclick="openModal('brule')"><div class="entry-name">Brûlé / Monocle</div><div class="entry-note">Physical magazine against digital everything. Physical retail. Physical radio. "Go there, see it, touch it." Every decision pushes against the ease of doing it all from a screen.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <rect x="8" y="8" width="32" height="32" rx="1" style="transform: rotate(-1deg); transform-origin: center;" />
+        <line x1="8" y1="24" x2="40" y2="24" />
+        <line x1="24" y1="8" x2="24" y2="40" />
+        <path d="M16 16 Q24 20 32 16" stroke-width="1.2" />
+      </svg>
+      <div>
+        <div class="cluster-label">Systems</div>
+        <div class="cluster-desc">Pushing against the rules that govern how things are supposed to work. The calendar, the pitch, the logo, the hierarchy, the construction process.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('philo')"><div class="entry-name">Phoebe Philo</div><div class="entry-note">"I don't know why there has to be such a beginning and end in our industry." Rejects seasons, shows, the fashion calendar. Views her work as one continuous collection. The system says divide. She refuses.</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha</div><div class="entry-note">Launched nofreepitches.com. 7,000 signatures. "We were being exploited by a system where they use interesting projects as bait for agencies to compete against each other." Changed the rule.</div></div>
+      <div class="entry-row" onclick="openModal('sato')"><div class="entry-name">Nendo / Sato</div><div class="entry-note">Rejected the standard Japanese construction process for the Japan Pavilion. "If the construction process is the same, the results will inevitably be similar." Chose a method nobody had used before.</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">His own team says "Chad, that's not Tartine." The system he built pushes back against his evolution. He pushes through anyway. "A big part of what we do is evolution."</div></div>
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">"Who wants to be the logo police? That's not the right color. That's not the right use. The world's done with that." Brand systems should enable creativity, not imprison it.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">"We're not Margaret Howell. I have huge respect for her consistency, but there's more than that." The system rewards consistency. He wants consistency AND movement. Both.</div></div>
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">"We've done everything opposite to a lot of other people." No shows at first. No creative director title announced. No press. Built a $250–300M business by refusing every convention of how fashion brands launch.</div></div>
+      <div class="entry-row" onclick="openModal('formafantasma')"><div class="entry-name">Formafantasma</div><div class="entry-note">Challenge how the design industry treats materials — as surface, not substance. Bring scientists and historians into the process. The system says pick a material and style it. They say understand where it comes from first.</div></div>
+      <div class="entry-row" onclick="openModal('brule')"><div class="entry-name">Brûlé / Monocle</div><div class="entry-note">"Instagram is great if you've got a hair salon." Won't chase TikTok. Won't do work-from-home. Won't accept that digital replaces print. Record profitability year — all paper. Refuses every convention of how media is supposed to work now.</div></div>
+      <div class="entry-row" onclick="openModal('kojima')"><div class="entry-name">Kojima</div><div class="entry-note">Total authorship at industrial scale — writes, directs, designs, produces. Every camera angle hand-placed in a 40-hour experience. Invented his own genre term rather than accept existing categories. Left Konami after 29 years rather than accept corporate control over his vision.</div></div>
+      <div class="entry-row" onclick="openModal('saarinen')"><div class="entry-name">Saarinen / Linear</div><div class="entry-note">Designed for someone, not everyone. Opinionated defaults against infinite customization. Refuses the Silicon Valley obsession with speed and scale. Saw hyper-growth dilute culture at Airbnb and Coinbase. Built the opposite.</div></div>
+      <div class="entry-row" onclick="openModal('herndon')"><div class="entry-name">Herndon / Dryhurst</div><div class="entry-note">Co-founded Spawning to build a consent layer for AI. Reject the binary: you're either pro-AI or pro-artist. The question isn't the technology — it's the governance. Built the tools that let artists say yes or no to how their work is used.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="24" cy="24" r="12" style="transform: rotate(1deg); transform-origin: center;" />
+        <circle cx="24" cy="24" r="4" />
+      </svg>
+      <div>
+        <div class="cluster-label">Authenticity</div>
+        <div class="cluster-desc">Pushing against not being true to yourself. The surface that doesn't match the inside. The label that replaces the person. The version of you that someone else wrote.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">"How many other people are called 'the girls' when they're designing? We're 37 years old. We have had very interesting lives." Being named by someone else's shorthand is the thing they resist most.</div></div>
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">Chrome tanning clogs the pores. Modern tatami has plastic inside. "There's no point in making them look the same on the surface." The outside must match the inside or it means nothing.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">A leather tab on the back waistband was "pornography" to his team. "We don't like style as a social disguise. We're interested in style as something deeper, something to do with feeling yourself."</div></div>
+      <div class="entry-row" onclick="openModal('fox')"><div class="entry-name">Toby Fox</div><div class="entry-note">Does the OFF music for free. Calls it "fanmusic." "Trying to replace those songs feels like breaking into somebody's house and pasting your face into their family photo album." Won't claim what isn't his.</div></div>
+      <div class="entry-row" onclick="openModal('blazy')"><div class="entry-name">Blazy</div><div class="entry-note">20 years in the anonymous white coat before becoming creative director of Bottega Veneta. The invisibility wasn't hiding — it was refusing to claim credit for work that wasn't ready to be claimed.</div></div>
+      <div class="entry-row" onclick="openModal('tyler')"><div class="entry-name">Tyler, the Creator</div><div class="entry-note">The parasocial fear. Millions of people think they know him. The loudest public person fights hardest for the private self that the public version can never reach.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Won't use AI as co-author. Experimented extensively. "When you use AI as a co-creator, it's often so boring. We got bored." The authentic voice is the one that struggled, not the one that was generated.</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha / Felipe</div><div class="entry-note">"For a long time I was always trying to copy the style of my European friends. I became much happier when I understood that what is special about my work is my background and where I come from."</div></div>
+      <div class="entry-row" onclick="openModal('toogood')"><div class="entry-name">Faye Toogood</div><div class="entry-note">Hid femininity for years for fear of judgment. Then: "Fuck it." Circles, color, softness. The authenticity wasn't always there — it was fought for. The refusal to keep hiding became the work.</div></div>
+      <div class="entry-row" onclick="openModal('brown')"><div class="entry-name">Cecily Brown</div><div class="entry-note">"A really deep art shame that it's probably hard for young artists to understand. It was embarrassing." Varnished paintings to hide the gesture. Signed her first name to deflate the machismo. Turned shame into levity.</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Describes himself as reserved, uncomfortable with the social role. Off social media. Doesn't keep his own clothes at home. The creative director of Dior whose private life refuses to look like Dior.</div></div>
+      <div class="entry-row" onclick="openModal('browne')"><div class="entry-name">Thom Browne</div><div class="entry-note">Can't fashion sketch. Runs in tailored clothes. Same suit every day for decades. The man who dresses most distinctively lives most repetitively. The uniform IS the authenticity — no gap between the person and the work.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: RITUALS -->
+<div class="theme-page" id="page-rituals">
+  <div class="theme-header">
+    <h2>Rituals</h2>
+    <p>Some things never change. Some things are the work itself. Some things you keep coming back to. Repetition is what makes it stronger.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="10" y1="12" x2="10" y2="36" />
+        <line x1="16" y1="12" x2="16" y2="36" />
+        <line x1="22" y1="12" x2="22" y2="36" />
+        <line x1="28" y1="12" x2="28" y2="36" />
+        <line x1="34" y1="12" x2="34" y2="36" />
+        <line x1="40" y1="12" x2="40" y2="36" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Fixed Routine</div>
+        <div class="cluster-desc">The thing that never changes. The sameness creates a container for everything else to change inside.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('browne')"><div class="entry-name">Thom Browne</div><div class="entry-note">Same gray suit. Same lunch. Same walk to work. Every day for decades. The uniform is the ritual is the identity. Everything inside the suit can change because the suit never does.</div></div>
+      <div class="entry-row" onclick="openModal('kouthoofd')"><div class="entry-name">Teenage Engineering / Kouthoofd</div><div class="entry-note">Rehearses organ badly every night for 5 years — to design one. Not practicing to get good. Practicing to understand what the instrument needs to be.</div></div>
+      <div class="entry-row" onclick="openModal('arnold')"><div class="entry-name">Daniel Arnold</div><div class="entry-note">Walks 8 hours a day. Every day. The city is the material, walking is the method, fear is the engine. The route changes. The walking doesn't.</div></div>
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">Barefoot. Coffee on the veranda. Observing small daily changes in the garden. Billie Holiday from inside an Edo-period house. 22 years of the same mantra: "I will deliver something that I truly believe in."</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Laundry and gardening in silence. No fashion at home. Off social media. The creative director of two major houses whose private routine is the opposite of everything those houses produce.</div></div>
+      <div class="entry-row" onclick="openModal('blazy')"><div class="entry-name">Blazy</div><div class="entry-note">Beer not champagne. Walks alone. 20 years in the anonymous white coat. The private life was fixed long before Bottega Veneta arrived. It didn't change when the title did.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M8 38 Q12 32 16 28 Q22 22 26 24 Q30 26 32 20 Q34 14 38 10" />
+        <path d="M38 10 Q34 16 32 20 Q28 28 24 30 Q20 32 16 28" stroke-dasharray="3 3" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Practice That IS The Work</div>
+        <div class="cluster-desc">The ritual isn't separate from the output. The doing and the making are the same activity.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('satisfy')"><div class="entry-name">Satisfy / Partouche</div><div class="entry-note">Designs while running. The run IS the design process. Practice IS product. No separation between the activity and what the activity produces.</div></div>
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">"On the floor with some pins and some scissors." Ashley: "Adjusting and shaping a garment." Asked where they're happiest — the answer is the work itself. The making is the ritual.</div></div>
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">Drew Helvetica by hand for 6 months at 17 under Marjorie Katz. "When you're drawing Helvetica for six months of your life, it becomes embedded into your neural net because it's physiology." The hand teaches the eye.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">"I'm an old guy, I still sketch, which is rare these days." The sketching isn't preparation for the work. The sketching is where the work happens. The hand moves before the mind decides.</div></div>
+      <div class="entry-row" onclick="openModal('brown')"><div class="entry-name">Cecily Brown</div><div class="entry-note">50 canvases at once. Can't paint from life — "too hard." Works from copies. Keeps an ongoing list of titles. Signs just "Cecily" on the front. The painting practice IS the thinking — "things just get abstract really quickly."</div></div>
+      <div class="entry-row" onclick="openModal('vonghia')"><div class="entry-name">Vo Trong Nghia</div><div class="entry-note">"I can meditate eight hours a day, to spend one hour doing good architecture." The meditation isn't separate from the architecture. The 8 hours produce the 1 hour. The ratio is the method.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Dragged her family into a rainstorm to film something floating. "We had the best time of our life." The assignment was the experience. The filming was the living. The practice was the point.</div></div>
+      <div class="entry-row" onclick="openModal('papaioannou')"><div class="entry-name">Dimitris Papaioannou</div><div class="entry-note">Silent theater — images not words. The body IS the medium. A painter who left painting because the body could say what the brush couldn't. The practice of movement IS the art form.</div></div>
+      <div class="entry-row" onclick="openModal('anderson_c')"><div class="entry-name">Christopher Anderson</div><div class="entry-note">Basketball spatial intelligence applied to the camera. Reading movement, anticipating position — the athletic practice became the photographic practice. The eye trained by the court.</div></div>
+      <div class="entry-row" onclick="openModal('herndon')"><div class="entry-name">Herndon / Dryhurst</div><div class="entry-note">Training ceremonies where participants sing to the AI. 15 UK choirs recorded for The Call. The audience contributes the data. The practice of communal singing IS the training of the model. The ritual and the technology are the same act.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 30 Q12 12 24 12 Q36 12 36 24 Q36 32 28 34" />
+        <path d="M32 32 L28 34 L28 30" />
+      </svg>
+      <div>
+        <div class="cluster-label">The Return</div>
+        <div class="cluster-desc">Going back to the same place, material, or question. The path goes out and comes back, slightly different each time.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">Returns to grain. Returns to the backyard oven mentality. Returns to community in every new city — SF, LA, Seoul. The bread is the same question asked in a new place. 6 years developing one answer.</div></div>
+      <div class="entry-row" onclick="openModal('reed')"><div class="entry-name">Order / Jesse Reed</div><div class="entry-note">Returns to archives. Returns to what already exists. NYCTA manual, NASA manual, Herman Miller, Gage & Tolner. "We go back into the archives and pull out some old logo and then make it that." The return is the method.</div></div>
+      <div class="entry-row" onclick="openModal('philo')"><div class="entry-name">Phoebe Philo</div><div class="entry-note">"One continuous collection." No beginning or end. No seasons. Always returning to the same wardrobe, the same woman, the same question: what do you need? The continuity is the commitment.</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Same question refined over 15 years. Conditional Design (2000s) → Designing Friction (2020s). Two manifestos, one inquiry. The return sharpens the question each time.</div></div>
+      <div class="entry-row" onclick="openModal('broskoski')"><div class="entry-name">Are.na / Broskoski</div><div class="entry-note">15 years building one tool. Returns to the same problem every day: how do you protect conditions for active attention? Aspires to a 1,300-year-old hot spring. The return has no end date.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">"Chic and utilitarian" since 1991. 35 years of returning to the same brief. "What do you need every day?" The question doesn't change. The answer evolves.</div></div>
+      <div class="entry-row" onclick="openModal('zumthor')"><div class="entry-name">Peter Zumthor</div><div class="entry-note">20-year buildings. Returns to the same sensory questions: what does the door handle feel like? What does the light do at 4pm? What does the room sound like empty? The return is measured in decades, not days.</div></div>
+      <div class="entry-row" onclick="openModal('kojima')"><div class="entry-name">Kojima</div><div class="entry-note">Parents' film ritual continued into adulthood — still watches films nightly. Visits bookstores in every city. 30 years returning to the same subject: connection across isolation. Metal Gear, Death Stranding, Death Stranding 2 — the same question asked in new forms.</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">Berlin to Gando. Gando to Berlin. Constantly returning. Could have stayed in Europe. Every trip back brings technical knowledge from Germany and takes communal knowledge from Burkina Faso. The return is the architecture.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: ORIGINS -->
+<div class="theme-page" id="page-originality">
+  <div class="theme-header">
+    <h2>Origins</h2>
+    <p>The moment before the work began. The thing that happened that made this specific person make this specific work.</p>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M24 8 L24 28" />
+        <path d="M16 20 L24 28 L32 20" />
+        <line x1="12" y1="38" x2="36" y2="38" />
+      </svg>
+      <div>
+        <div class="cluster-label">Loss</div>
+        <div class="cluster-desc">Something was taken. The work fills the space left behind.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('kojima')"><div class="entry-name">Kojima</div><div class="entry-note">Father died at 13. Loneliness became the subject. Every game since is about connection. Every story is paternal. The loss is the engine of 30 years of work.</div></div>
+      <div class="entry-row" onclick="openModal('ghotmeh')"><div class="entry-name">Ghotmeh</div><div class="entry-note">Mother's architecture diploma during the Lebanese civil war. Bombing outside the exam room. Peace was taken. Stone Garden is archaeology of the future — building from what survived.</div></div>
+      <div class="entry-row" onclick="openModal('seals')"><div class="entry-name">Tré Seals</div><div class="entry-note">Brain tumors at age 4. Drawing as pain relief. Health was taken — the hand that drew through the pain became the hand that designs typefaces as historical justice.</div></div>
+      <div class="entry-row" onclick="openModal('joseph')"><div class="entry-name">Kahlil Joseph</div><div class="entry-note">Brother Noah's death. The absent archive. BLKNWS as conceptual journalism — building the record that didn't exist for the person who was lost.</div></div>
+      <div class="entry-row" onclick="openModal('herndon')"><div class="entry-name">Herndon / Dryhurst</div><div class="entry-note">Displacement from church community. The communal singing was taken. The AI choir rebuilds it — communal singing through technology, replacing what was lost with what's possible.</div></div>
+      <div class="entry-row" onclick="openModal('vonghia')"><div class="entry-name">Vo Trong Nghia</div><div class="entry-note">Childhood depression. Cluster bombs. No electricity. Everything was taken. 1,000 days of meditation in Myanmar. Then: architecture that reconnects humans with nature. Building back what war destroyed.</div></div>
+      <div class="entry-row" onclick="openModal('brown')"><div class="entry-name">Cecily Brown</div><div class="entry-note">Painting was embarrassing. London in the '90s — "a really deep art shame." Used to varnish everything to hide the gesture. Moved to New York because it was the only place you could grow as a painter. 25 years later: a Met retrospective.</div></div>
+      <div class="entry-row" onclick="openModal('arnold')"><div class="entry-name">Daniel Arnold</div><div class="entry-note">Loneliness in a new city. Depression as release valve. The connection to place was missing — so he walked 8 hours a day until the city became his. The loss of belonging produced the method of finding it.</div></div>
+      <div class="entry-row" onclick="openModal('gaggan')"><div class="entry-name">Gaggan Anand</div><div class="entry-note">Wanted to be a drummer. Poverty ended that. The dream was taken by economics. Progressive Indian cuisine became the rebellion — the creative energy that couldn't go into music went into food instead.</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">Sent away from his family at 7. His community, his safety — taken. The suffocating classroom — 100 children, no ventilation, no light. Childhood itself was the loss. The architecture gives back what was taken — light, air, community, dignity.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="10" y1="24" x2="18" y2="24" />
+        <line x1="30" y1="24" x2="38" y2="24" />
+        <path d="M18 18 L18 30" stroke-dasharray="2 3" />
+        <path d="M30 18 L30 30" stroke-dasharray="2 3" />
+      </svg>
+      <div>
+        <div class="cluster-label">Absence</div>
+        <div class="cluster-desc">Something was never there. The work builds what was missing.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('satisfy')"><div class="entry-name">Satisfy / Partouche</div><div class="entry-note">No brand existed for the run he experienced. Not performance running, not fashion running — the run as felt experience. The absence was the brief. He made what was missing.</div></div>
+      <div class="entry-row" onclick="openModal('saarinen')"><div class="entry-name">Linear / Saarinen</div><div class="entry-note">Ugly bicycle at age 7. Beautiful software didn't exist. "Unnecessary ugliness" became a personal offense. Opinionated software as the response to what shouldn't have been absent.</div></div>
+      <div class="entry-row" onclick="openModal('kouthoofd')"><div class="entry-name">Teenage Engineering / Kouthoofd</div><div class="entry-note">Father drew beautifully but couldn't sell. The market for personal, idiosyncratic design didn't exist. The son built a company where product IS personality. Made the market his father never had.</div></div>
+      <div class="entry-row" onclick="openModal('lemaire')"><div class="entry-name">Lemaire</div><div class="entry-note">Pattern cutting was never learned. Started at 19, tried school, had to stop. The skill was absent — so everything else had to be sharper. Eye, fabric, proportion, styling. The gap became the edge.</div></div>
+      <div class="entry-row" onclick="openModal('broskoski')"><div class="entry-name">Are.na / Broskoski</div><div class="entry-note">del.icio.us died. The tool for active, intentional attention disappeared. Nobody was building it back. So he did. 15 years filling an absence the market didn't recognize.</div></div>
+      <div class="entry-row" onclick="openModal('kere')"><div class="entry-name">Kéré</div><div class="entry-note">Sent away at 7 to a suffocating classroom with no ventilation, no light, no community. The school he needed didn't exist. So he built it — ventilated, open, made by the village itself.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="24" cy="24" r="4" />
+        <path d="M24 20 L24 8" />
+        <path d="M28 24 L40 24" />
+        <path d="M24 28 L24 40" />
+        <path d="M20 24 L8 24" />
+      </svg>
+      <div>
+        <div class="cluster-label">Encounter</div>
+        <div class="cluster-desc">Something was seen or experienced that changed everything. The work extends the encounter.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('nakamura')"><div class="entry-name">Visvim / Nakamura</div><div class="entry-note">Teenager discovering American outdoor gear. Just thought it was cool. Then asked why. Realized it was the purpose, not the appearance. 22 years of one question: what's underneath the surface?</div></div>
+      <div class="entry-row" onclick="openModal('devlin')"><div class="entry-name">Es Devlin</div><div class="entry-note">Model of Rye at 6. Music school corridor at 11 — "I walked down this corridor and everything changed." Every stage sculpture since is a 28-year extension of that corridor.</div></div>
+      <div class="entry-row" onclick="openModal('collins')"><div class="entry-name">Collins</div><div class="entry-note">Saw Chuck Jones lecture about Road Runner timing. Yellow Ball Workshop as a child — stop-motion with cardboard cutouts. The encounter with animation became a life in design that moves.</div></div>
+      <div class="entry-row" onclick="openModal('reed')"><div class="entry-name">Order / Jesse Reed</div><div class="entry-note">Found the NYCTA manual in Pentagram's basement. "We freaked out, brought it upstairs, all sort of geeked out." One encounter in a basement launched a publishing company and a design practice.</div></div>
+      <div class="entry-row" onclick="openModal('sato')"><div class="entry-name">Nendo / Sato</div><div class="entry-note">Arrived in Japan at 11 from Canada. "Mechanical pencils that extend when you shake them, erasers that collect shavings." The encounter with Japanese everyday design became a career of making the overlooked visible.</div></div>
+      <div class="entry-row" onclick="openModal('robertson')"><div class="entry-name">Tartine / Robertson</div><div class="entry-note">Baking in a backyard in Marshall, California. Living in a blacksmith-adventurer's house. Firing a wood oven at 3am. The encounter with bread at its most basic — 60 loaves, no permit, $100 fine — set the trajectory.</div></div>
+      <div class="entry-row" onclick="openModal('portorocha')"><div class="entry-name">Porto Rocha / Felipe</div><div class="entry-note">Accepted at Fabrica to work for Colors Magazine in Treviso. "First time I traveled abroad, first time I had to speak English." One encounter opened everything — "it really changed my life."</div></div>
+      <div class="entry-row" onclick="openModal('fp')"><div class="entry-name">Floating Points</div><div class="entry-note">PhD in neuroscience of pain at UCL. The encounter with pain as a scientific subject — studying how the body registers sensation — became music that stores feeling as sound, emotion as precision.</div></div>
+      <div class="entry-row" onclick="openModal('anderson_c')"><div class="entry-name">Christopher Anderson</div><div class="entry-note">NBA injury. Basketball ended but the spatial intelligence stayed — reading movement, anticipating position, seeing the geometry of bodies in space. The court trained the camera eye.</div></div>
+      <div class="entry-row" onclick="openModal('perplexity')"><div class="entry-name">Perplexity / Escha Vera</div><div class="entry-note">"I left Descript and I kind of felt like maybe my career is over." First day at Perplexity — no design system, handed keys to Comet browser. One encounter with a blank slate rebuilt a career from scratch.</div></div>
+      <div class="entry-row" onclick="openModal('walesbonner')"><div class="entry-name">Wales Bonner</div><div class="entry-note">Bus rides across south London between separated parents. Between neighborhoods, between cultures, between identities. The encounter wasn't one moment — it was the daily crossing that became the method of research as practice.</div></div>
+      <div class="entry-row" onclick="openModal('zumthor')"><div class="entry-name">Peter Zumthor</div><div class="entry-note">Aunt's door handle. The temperature of the brass, the weight, the sound of the latch. One childhood encounter with how a building feels to the body — and 50 years of architecture built from that memory.</div></div>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-head">
+      <svg class="cluster-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="12" y1="12" x2="36" y2="36" />
+        <line x1="12" y1="36" x2="36" y2="12" />
+      </svg>
+      <div>
+        <div class="cluster-label">Refusal</div>
+        <div class="cluster-desc">Something was rejected. The work is built from the no.</div>
+      </div>
+    </div>
+    <div class="cluster-entries">
+      <div class="entry-row" onclick="openModal('philo')"><div class="entry-name">Phoebe Philo</div><div class="entry-note">Refused the pace. Refused seasons. Refused storytelling. Refused interviews for 10 years. Left Céline because the industry "abuses creativity." The entire eponymous label is built from the refusal.</div></div>
+      <div class="entry-row" onclick="openModal('therow')"><div class="entry-name">The Row</div><div class="entry-note">Refused visibility. Cast at nine months, scrutiny their whole lives. Built the exact opposite — anonymous, authorless, private. "Anonymity is a luxury." The refusal of their childhood IS the brand.</div></div>
+      <div class="entry-row" onclick="openModal('fox')"><div class="entry-name">Toby Fox</div><div class="entry-note">Refused to be more than one person. Made Undertale essentially alone. Does the OFF music for free, calls it "fanmusic." Won't claim what isn't his. Won't scale. "Alright, see ya."</div></div>
+      <div class="entry-row" onclick="openModal('moniker')"><div class="entry-name">Moniker</div><div class="entry-note">Refused AI as co-author. Refused the frictionless. Refused the platform economy. Dissolved the studio rather than continue on terms that didn't work. Wrote two manifestos to explain why.</div></div>
+      <div class="entry-row" onclick="openModal('browne')"><div class="entry-name">Thom Browne</div><div class="entry-note">Allentown said no. He sold his car to move to New York. People were "horrified" by the short suit. The ridiculed thing became the identity. The refusal to change in the face of mockery IS the origin.</div></div>
+      <div class="entry-row" onclick="openModal('tyler')"><div class="entry-name">Tyler, the Creator</div><div class="entry-note">Refused to stop being weird. Mocked for liking Jamiroquai. Never met his father. Every scene rejected him so he built every scene himself — music, fashion, festival, TV, brand. The refusal to fit became the empire.</div></div>
+      <div class="entry-row" onclick="openModal('toogood')"><div class="entry-name">Faye Toogood</div><div class="entry-note">Hid femininity for years for fear of judgment. The refusal came later — not hiding anymore. "Fuck it." Circles, color, softness. The refusal to keep suppressing herself became the entire aesthetic.</div></div>
+      <div class="entry-row" onclick="openModal('papaioannou')"><div class="entry-name">Dimitris Papaioannou</div><div class="entry-note">Ran away at 18. Refused words — chose silent theater, images not language. Refused painting — chose the body. Refused Greece — chose exile. Every refusal stripped away one more thing until only the essential remained.</div></div>
+      <div class="entry-row" onclick="openModal('escobedo')"><div class="entry-name">Escobedo</div><div class="entry-note">Too shy for art. Refused to impose — chose architecture as "safer," then made recessive buildings that refuse to dominate. The shyness wasn't overcome. It became the design principle.</div></div>
+      <div class="entry-row" onclick="openModal('anderson')"><div class="entry-name">Jonathan Anderson</div><div class="entry-note">Rugby family during the Troubles. Refused that path. Went to New York to act. Refused that too — pivoted to fashion. Rejected from every school. Bankrupted multiple times. Kept refusing the thing that was working to reach the next thing.</div></div>
+      <div class="entry-row" onclick="openModal('torrisi')"><div class="entry-name">Torrisi / MFG</div><div class="entry-note">Rejected for the Vesuvio space — treated like kids who weren't real operators. The brokenhearted rejection fueled everything after. Refused to accept that Italian-American food wasn't worthy of fine dining. Built the empire from the genre everyone dismissed.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME: A-Z DIRECTORY -->
+<div class="theme-page" id="page-directory">
+  <div class="theme-header">
+    <h2>A–Z</h2>
+    <p>All practitioners and practices. Alphabetical.</p>
+  </div>
+
+  <table class="dir-table">
+    <thead><tr><th>Name</th><th>Practice</th><th>Themes</th></tr></thead>
+    <tbody>
+      <tr onclick="openModal('anderson_c')"><td>Anderson, Christopher</td><td>Photography</td><td class="dir-themes">Outsiders · Rituals · Origins</td></tr>
+      <tr onclick="openModal('anderson')"><td>Anderson, Jonathan (Loewe / Dior)</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('arnold')"><td>Arnold, Daniel</td><td>Photography</td><td class="dir-themes">Rituals · Outsiders · Origins</td></tr>
+      <tr onclick="openModal('broskoski')"><td>Are.na / Broskoski, Charles</td><td>Technology</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr><td>Baby Teeth</td><td>Publishing</td><td class="dir-themes">Partnership</td></tr>
+      <tr onclick="openModal('blazy')"><td>Blazy, Matthieu (Bottega Veneta)</td><td>Fashion</td><td class="dir-themes">Rituals · Frictions</td></tr>
+      <tr onclick="openModal('brown')"><td>Brown, Cecily</td><td>Painting</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('browne')"><td>Browne, Thom</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('brule')"><td>Brûlé, Tyler / Monocle</td><td>Publishing</td><td class="dir-themes">(Re)Sources · Outsiders · Frictions</td></tr>
+      <tr><td>CAMP Mumbai / Bijoy Jain</td><td>Architecture</td><td class="dir-themes">(Re)Sources · Partnership</td></tr>
+      <tr onclick="openModal('collins')"><td>Collins, Brian / COLLINS</td><td>Design</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('devlin')"><td>Devlin, Es</td><td>Stage Design</td><td class="dir-themes">Partnership · Origins</td></tr>
+      <tr onclick="openModal('escobedo')"><td>Escobedo, Frida</td><td>Architecture</td><td class="dir-themes">Outsiders · Origins</td></tr>
+      <tr onclick="openModal('field')"><td>Field, Dylan (Figma)</td><td>Technology</td><td class="dir-themes">Partnership</td></tr>
+      <tr onclick="openModal('fp')"><td>Floating Points / Sam Shepherd</td><td>Music</td><td class="dir-themes">Outsiders · Origins</td></tr>
+      <tr onclick="openModal('formafantasma')"><td>Formafantasma</td><td>Design</td><td class="dir-themes">(Re)Sources · Frictions · Origins</td></tr>
+      <tr onclick="openModal('fox')"><td>Fox, Toby</td><td>Gaming · Music</td><td class="dir-themes">Partnership · Frictions · Origins</td></tr>
+      <tr onclick="openModal('gaggan')"><td>Gaggan Anand</td><td>Food</td><td class="dir-themes">Outsiders · Origins</td></tr>
+      <tr onclick="openModal('ghotmeh')"><td>Ghotmeh, Lina</td><td>Architecture</td><td class="dir-themes">Origins</td></tr>
+      <tr onclick="openModal('herndon')"><td>Herndon, Holly / Dryhurst, Mat</td><td>Music · AI</td><td class="dir-themes">Partnership · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('joseph')"><td>Joseph, Kahlil</td><td>Film</td><td class="dir-themes">Origins</td></tr>
+      <tr onclick="openModal('kere')"><td>Kéré, Diébédo Francis</td><td>Architecture</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Rituals · Origins</td></tr>
+      <tr onclick="openModal('kojima')"><td>Kojima, Hideo</td><td>Gaming</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('kouthoofd')"><td>Kouthoofd, Jesper / Teenage Engineering</td><td>Technology · Product</td><td class="dir-themes">Rituals · Origins</td></tr>
+      <tr onclick="openModal('lemaire')"><td>Lemaire, Christophe</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('loosejoints')"><td>Loose Joints</td><td>Publishing</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders</td></tr>
+      <tr onclick="openModal('moniker')"><td>Moniker / Maurer + Wouters</td><td>Design · Interactive</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('mschf')"><td>MSCHF / Whaley, Gabriel</td><td>Art · Product</td><td class="dir-themes">Outsiders</td></tr>
+      <tr onclick="openModal('nakamura')"><td>Nakamura, Hiroki / Visvim</td><td>Fashion · Craft</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('nerihu')"><td>Neri&Hu</td><td>Architecture</td><td class="dir-themes">Partnership</td></tr>
+      <tr onclick="openModal('papaioannou')"><td>Papaioannou, Dimitris</td><td>Performance</td><td class="dir-themes">Outsiders · Rituals · Origins</td></tr>
+      <tr onclick="openModal('satisfy')"><td>Partouche, Brice / Satisfy</td><td>Product · Running</td><td class="dir-themes">(Re)Sources · Rituals · Origins</td></tr>
+      <tr onclick="openModal('perplexity')"><td>Perplexity / Escha Vera</td><td>Technology · Design</td><td class="dir-themes">Outsiders · Origins</td></tr>
+      <tr onclick="openModal('perron')"><td>Perron, Willo</td><td>Stage Design</td><td class="dir-themes">Outsiders</td></tr>
+      <tr onclick="openModal('philo')"><td>Philo, Phoebe</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('portorocha')"><td>Porto Rocha / Porto + Rocha</td><td>Design</td><td class="dir-themes">Partnership · Outsiders · Frictions · Origins</td></tr>
+      <tr onclick="openModal('reed')"><td>Reed, Jesse / Order</td><td>Design · Publishing</td><td class="dir-themes">(Re)Sources · Outsiders · Rituals · Origins</td></tr>
+      <tr onclick="openModal('robertson')"><td>Robertson, Chad / Tartine</td><td>Food</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('saarinen')"><td>Saarinen, Karri / Linear</td><td>Technology</td><td class="dir-themes">Partnership · Frictions · Origins</td></tr>
+      <tr onclick="openModal('sato')"><td>Sato, Oki / Nendo</td><td>Design · Architecture</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Origins</td></tr>
+      <tr onclick="openModal('seals')"><td>Seals, Tré</td><td>Type Design</td><td class="dir-themes">Outsiders · Origins</td></tr>
+      <tr onclick="openModal('therow')"><td>The Row / Olsen, Mary-Kate + Ashley</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('toogood')"><td>Toogood, Faye</td><td>Design · Furniture</td><td class="dir-themes">Frictions · Origins</td></tr>
+      <tr onclick="openModal('torrisi')"><td>Torrisi / Major Food Group</td><td>Food</td><td class="dir-themes">(Re)Sources · Partnership · Outsiders · Origins</td></tr>
+      <tr onclick="openModal('tyler')"><td>Tyler, the Creator</td><td>Music · Fashion · Media</td><td class="dir-themes">Outsiders · Frictions · Origins</td></tr>
+      <tr onclick="openModal('vally')"><td>Vally, Sumayya / Counterspace</td><td>Architecture</td><td class="dir-themes">Outsiders</td></tr>
+      <tr onclick="openModal('verdy')"><td>Verdy</td><td>Design · Fashion</td><td class="dir-themes">Partnership</td></tr>
+      <tr onclick="openModal('vonghia')"><td>Vo Trong Nghia</td><td>Architecture</td><td class="dir-themes">(Re)Sources · Frictions · Rituals · Origins</td></tr>
+      <tr onclick="openModal('walesbonner')"><td>Wales Bonner, Grace</td><td>Fashion</td><td class="dir-themes">(Re)Sources · Outsiders · Origins</td></tr>
+      <tr onclick="openModal('zumthor')"><td>Zumthor, Peter</td><td>Architecture</td><td class="dir-themes">(Re)Sources · Rituals · Origins</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- THEME: CONSTELLATION -->
+<div class="theme-page" id="page-constellation">
+  <div class="theme-header">
+    <h2>Constellation</h2>
+    <p>Two practitioners. Different disciplines. Same pattern. Click to discover what connects them.</p>
+  </div>
+  <div class="pair-container">
+    <div class="pair-cards" id="pairCards">
+      <div class="pair-card" id="pairA"></div>
+      <div class="pair-shared" id="pairShared"></div>
+      <div class="pair-card" id="pairB"></div>
+    </div>
+    <button class="pair-btn" id="pairBtn" onclick="generatePair()">Another pair</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span>Created and developed by <a href="https://www.linkedin.com/in/edward-cotton-93b535/" target="_blank" style="color: var(--dim); text-decoration: underline; text-underline-offset: 3px;">Ed Cotton</a> — Inverness Consulting</span>
+  <span>2025–2026</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal-panel" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="document.getElementById('modalBg').classList.remove('open')">close ✕</button>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-discipline" id="mDisc"></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const data={anderson:{n:"Jonathan Anderson",d:"Fashion · Loewe · JW Anderson · Dior",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Born 1984, Magherafelt, Northern Ireland, during the Troubles. Father was captain of Ireland\'s rugby team. Brother followed into rugby. He chose theater. Moved to New York at 18 to study acting, pivoted to costume design, then fashion. Rejected from fashion schools. Bankrupted himself multiple times building JW Anderson. Now the first person to oversee menswear, womenswear, and couture at Dior since Christian Dior himself. 18 collections a year across three brands.</p></div><div class="modal-section"><div class="modal-section-label">The private self</div><p>Off social media entirely. Doesn\'t keep his own clothes at home — stores them elsewhere. No design furniture at home. Collects Arts and Crafts ceramics — Baillie Scott, Rennie Mackintosh. Curates exhibitions. Loves orchids. Describes himself as reserved, uncomfortable with the social role of the job. The creative director of two major houses whose private life is the opposite of everything those houses produce.</p></div><div class="modal-section"><div class="modal-section-label">The method</div><p>Works through mind-mapping — radiates outward from a center. Never finishes a collection until the day of the show. When stuck, cleans everything — every cupboard, every window. Physical activity as displacement for creative paralysis. The 2013 ruffled shorts show was attacked for humiliating models. Now regarded as a landmark in genderless fashion. Provocation creates more lasting impact than pleasing.</p></div><div class="modal-section"><div class="modal-section-label">Origins</div><p>Northern Ireland during the Troubles — car bombs, a town getting blown up. But also summers in Ibiza where his parents had a house. The contrasting environments shaped everything. A rugby family that produced a fashion designer. Rejected from every school, bankrupted multiple times, kept going. The pattern: keeps giving up the thing that\'s working to reach the thing that\'s next.</p></div><div class="modal-quote">"I don\'t take anything for granted because I know that life is like a fuse."</div>'},kojima:{n:"Hideo Kojima",d:"Gaming",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Father died when he was 13. Came home to an empty house every day after school. That loneliness — chronic, lifelong, never fully resolved — became the subject of every game he has ever made. Death Stranding is a game about a man walking alone across a broken world, building connections between isolated people. The strands that connect them are literal. 30 years of work, one subject.</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>Parents had a nightly film-watching ritual — he wasn\\\'t allowed to go to bed until the movie was finished. That ritual continued into adulthood. Visits bookstores obsessively. Joy Division as bedrock. Books, films, music consumed relentlessly. The creative input is omnivorous. The Creative Gene, his essay collection, reveals how every piece of media he absorbed became material for his work.</p></div><div class="modal-section"><div class="modal-section-label">Total authorship</div><p>Writes, directs, designs, produces — every camera angle hand-placed in a 40-hour experience. Studied economics because no path into filmmaking existed in Japan. Friends were unsupportive. Family discouraged art. Joined Konami at 23, left after 29 years in a bitter departure. Started over with nothing — no studio, no team, no IP. Built it all back.</p></div><div class="modal-section"><div class="modal-section-label">The coherence</div><p>All his games are paternal stories. The father\\\'s death at 13 echoes through every narrative — loss, connection, the impossibility of reaching someone who is gone. He made walking into a game mechanic. He made loneliness into a multiplayer experience. He scrapped and rewrote Death Stranding 2 during the pandemic because the world had caught up to what he\\\'d been feeling his entire life.</p></div><div class="modal-quote">"I\\\'m very prone to loneliness. When people play this game they realize people like them exist all over the world. That\\\'s what I want people to feel."</div>'},brule:{n:"Tyler Brûlé / Monocle",d:"Publishing · Media · Retail",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Record year for profitability — all driven by paper. "When I look at what really puts us in the black as a business, it\'s print." 12 shops and cafes worldwide. Radio station. Books. Newspapers. Retail went from 8% to 20% of revenue. 100 journalists in London. The entire operation is a world built from a magazine.</p></div><div class="modal-section"><div class="modal-section-label">The frictions</div><p>Unapologetic about people being in the office. "We could sell tickets sometimes because it\'s like a zoo — people are at desks, in the office all day, everything is full and buzzing." Won\'t chase TikTok. "Instagram is great if you\'ve got a hair salon. If you\'re a media brand, I\'m not convinced." Social media is "an event with a glass of wine" — not a platform strategy.</p></div><div class="modal-section"><div class="modal-section-label">The newsroom</div><p>"A good newsroom is intuitive. I can see someone\'s frown across the room. I can see someone reacting to something on the other side. You\'re able to read the dynamism of that place." The physical space IS the method. Screen-based work is possible but the result is worse.</p></div><div class="modal-section"><div class="modal-section-label">On print as luxury</div><p>Siemens — their AI metaverse marketing team — came to discuss a digital partnership. They picked up the Rolex paperback companion and said: "This is the most modern thing I\'ve ever seen." The project became print, almost no digital output. "If you\'re a chief marketing officer, you\'re commoditized if you\'re only on a screen. But if you can pass something around the table, you manufactured something."</p></div><div class="modal-quote">"Last year was a record year for us for profitability and growth. It was all about paper."</div>'},brown:{n:"Cecily Brown",d:"Painting",body:'<div class="modal-section"><div class="modal-section-label">What makes her unique</div><p>Came to New York from London because painting was "not almost embarrassing — it was embarrassing." Used to varnish everything to create distance from the gesture, the paint, the art shame. Signed just her first name on the front — Alex Katz\'s suggestion — because "it really showed it wasn\'t this macho gestural thing." 25 years of toggling between abstraction and figuration.</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>A magpie. Copies everything — Hogarth, Snyders, Munch, Fragonard, Manet, Jasper Johns. "I don\'t really know a work of art til I\'ve copied it. It\'s very much a way of committing it to memory, to your painting brain, so you can use it later on." Keeps rubbishy printouts from the computer. Prints things off her phone once a week. Recently started reversing Old Masters when she copies them — mirroring as method.</p></div><div class="modal-section"><div class="modal-section-label">The mirror</div><p>"I\'m looking back." The woman in the painting who is also the subject of the painting. Double consciousness — aware of yourself but aware of yourself being looked at. "A woman has an advantage when looking at painting, because when you\'re also the subject, it can be much richer and deeper." The cat under the table is the one looking back at you.</p></div><div class="modal-section"><div class="modal-section-label">Rituals</div><p>Can\'t paint from life — "I would kill myself, it\'s too hard." Works from copies, reproductions, found images. 50 canvases at once. Keeps an ongoing list of titles at all times — song lyrics, musicals, pop songs, perfumes, the Bible. "I loathe untitled."</p></div><div class="modal-quote">"It\'s almost like if I had to illustrate what I\'m always trying to do with my painting — just the toggling back between one reading of something and another."</div>'},saarinen:{n:"Karri Saarinen / Linear",d:"Technology",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>At 6 or 7, shopping for bicycles with his family, he looked at the options and couldn\\\'t understand why so many were ugly. Someone chose to make them that way. Why? That question — why do people accept unnecessary ugliness — has driven his entire career. Jira was the ugly bicycle of enterprise software. Linear is the nice bike.</p></div><div class="modal-section"><div class="modal-section-label">Finnish DNA</div><p>All three co-founders are Finnish. The design philosophy comes from Finnish culture — simplicity, function, durability, respect for materials. They barely spent the $52M they raised. Net-negative lifetime burn rate. He talks about Finnish potato farming in the same conversation as venture capital. Moved to Del Mar for quality of life. The company is deliberately calm, deliberately profitable, deliberately unscaled.</p></div><div class="modal-section"><div class="modal-section-label">The method</div><p>Before committing to Linear, the three founders met every Wednesday at a corner table in a bar, brought their computers, talked about what they learned that week. Almost a year of this before quitting their jobs. The product is 80% their intuition, 20% what people asked for. Opinionated defaults against infinite customization. When stuck: add more constraints. The wall reveals the shape of the room.</p></div><div class="modal-section"><div class="modal-section-label">The friction</div><p>Designed for someone, not everyone. Refuses the Silicon Valley obsession with speed and scale. Previously at Airbnb and Coinbase — saw how hyper-growth dilutes culture. Built the opposite: a venture-scale company that behaves like a craft studio. The founders stay connected to the product because they care about the output, not the org chart.</p></div><div class="modal-quote">"Why do people do this? If you make a bike, why don\\\'t you make it nice?"</div>'},browne:{n:"Thom Browne",d:"Fashion",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>One of seven kids in Allentown, Pennsylvania. Economics degree from Notre Dame, competitive swimmer. Tried acting in LA — didn\\\'t work out. Sold his car to get back to New York in 1997. Made five gray suits and wore them himself. The reaction was horror. He kept going. The ridiculed thing became the identity.</p></div><div class="modal-section"><div class="modal-section-label">The uniform</div><p>Same gray suit every day. Same breakfast. Same morning run. The staff wear the uniform too. When they\\\'re all together it looks like a living piece of art — you don\\\'t see the clothes, you see the whole idea. The consistency IS the freedom. Everything inside the suit can change because the suit never does.</p></div><div class="modal-section"><div class="modal-section-label">The method</div><p>Can\\\'t fashion sketch. Drawings are super abstract, more Bauhausian. Everything starts from proportion and shape, not illustration. Runs 8 miles daily — his mind is free and open when running. The distinction that matters to him: not perfection as a state, but perfect making as a process.</p></div><div class="modal-section"><div class="modal-section-label">The life</div><p>Life partner is Andrew Bolton, curator of the Met Costume Institute. Dachshund named Hector. Almost closed the business in 2009, days away from shutting down. Won the Adidas stripe lawsuit in 2023. Now chairman of the CFDA. The casual world of jeans and t-shirts became the establishment — his world of jackets and trousers became the anti-establishment.</p></div><div class="modal-quote">"People think wearing a uniform makes you less interesting, but I think the opposite."</div>'},kere:{n:"Diébédo Francis Kéré",d:"Architecture",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>First child in his village to go to school. Father was the village chief who couldn\\\'t read — sent his eldest son away at age 7 to learn to read for him. The village called the father stupid for doing it. The suffocating classroom — 100 children in an unventilated cement block with no light — became the origin of everything. He vowed to make schools better. Then he did. First African to win the Pritzker Prize.</p></div><div class="modal-section"><div class="modal-section-label">The method</div><p>Draws plans in the sand for people who can\\\'t read. The entire village takes part in construction — children bring one stone each morning, women prepare floors, men press bricks. The community was skeptical about mud bricks — feared rain would destroy them. He had to prove that local material could be better than concrete. The building process IS the architecture.</p></div><div class="modal-section"><div class="modal-section-label">The return</div><p>Trained as a carpenter in Berlin. Studied architecture at TU Berlin. Could have stayed in Europe. Returned to Gando — one of the poorest places on earth. Gave up the materials palette that Western architecture assumes. Built with clay and laterite instead. Lives in Berlin but returns constantly. The life is the bridge between German technical knowledge and Burkinabè communal knowledge.</p></div><div class="modal-section"><div class="modal-section-label">Origins</div><p>His grandmother\\\'s storytelling room was his first sense of architecture. Her voice inside the room enclosed them, summoning them closer to form a safe place. The terrible classroom and the beautiful room — two childhood spaces that produced a career. His name was given according to the constellation of the sky.</p></div><div class="modal-quote">"Everyone deserves quality, everyone deserves luxury, and everyone deserves comfort."</div>'},torrisi:{n:"Torrisi / Major Food Group",d:"Food",body:'<div class="modal-section"><div class="modal-section-label">What makes them unique</div><p>Rich Torrisi and Mario Carbone met at culinary school in 1998. Both Italian-American, both from New York, both trained under Daniel Boulud. They believed Italian-American food deserved the same reverence as any other cuisine — but the fine-dining world didn\\\'t take it seriously. So they built an empire from the cuisine the establishment dismissed. Carbone, The Grill, Sadelle\\\'s, ZZ\\\'s — all from a genre everyone else saw as uncultured.</p></div><div class="modal-section"><div class="modal-section-label">Partnership</div><p>Three-person triad: Torrisi handles culinary and menus, Carbone oversees branding, uniforms, plates, cutlery — every sensory dimension. Zalaznick runs new business. Different skill sets, common goal. When Zalaznick first sat down with Carbone, they talked for six hours and discovered they\\\'d been dreaming of the same restaurant.</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>Built into the frame of the past. The former Rocco space became Carbone — the neon sign glows over the original Rocco sign, honoring the neighborhood\\\'s history. Italian-American food from their own childhoods — Queens, Westchester, Mulberry Street — treated with fine-dining rigor. The nostalgia isn\\\'t decorative. It\\\'s the architecture.</p></div><div class="modal-section"><div class="modal-section-label">The private self</div><p>Torrisi: lives near Washington Square Park, goes there daily with his dog. Cycles Central Park, runs under bridges. Eats cardamom coffee from Punjabi Deli, salt baked squid from Chinatown noodle shops, hot dogs with the works. The man behind the $60 veal parm eats street food and goes for late-night squid in Chinatown.</p></div><div class="modal-quote">"Italian food gets a tremendous amount of attention in New York, but Italian-American food doesn\\\'t get so much play at all."</div>'},herndon:{n:"Holly Herndon & Mat Dryhurst",d:"Music · AI · Technology",body:'<div class="modal-section"><div class="modal-section-label">What makes them unique</div><p>The practitioners who complicate the thesis. They don\\\'t resist AI — they author their relationship with it. Holly trained an AI on her own voice (Spawn). Holly+ lets anyone sing in her voice. Spawning builds consent tools for artists in AI datasets. Too pro-AI for the art world, too pro-artist for the tech world. The intellectual loneliness of refusing to join either camp.</p></div><div class="modal-section"><div class="modal-section-label">Origins</div><p>Holly grew up singing in a church choir in East Tennessee. The church was her social life — music as part of communion, ritual, coming together. That communal singing, lost when she left, is what she\\\'s been rebuilding with technology ever since. East Tennessee church choir to Berlin techno to Stanford PhD to AI art. Each displacement becomes material.</p></div><div class="modal-section"><div class="modal-section-label">Partnership</div><p>Met through a podcast — Holly sent an angry email about a late release. Married a year later. 17 years together. Had a baby during COVID. Holly emerged from postpartum into the AI explosion. Decentralized studio in Berlin: GPUs at home, meeting space nearby, sound studio elsewhere, 3D printing in another district. The partnership is romantic, creative, and structural — built into the systems they make.</p></div><div class="modal-section"><div class="modal-section-label">The method</div><p>Machine learning models as art medium. Every step in the model creation process is a moment for creative intervention. Training ceremonies where participants sing to the AI. 15 UK choirs recorded for The Call at the Serpentine. The audience contributes the data. The collaboration is open-source and governed. Named among TIME\\\'s 100 most influential voices in AI.</p></div><div class="modal-quote">"AI is us, in aggregate, with emergent properties."</div>'},philo:{n:"Phoebe Philo",d:"Fashion",body:'<div class="modal-section"><div class="modal-section-label">What makes her unique</div><p>First woman to take maternity leave at a major fashion house. Left Céline in 2018. Spent years deliberating. Returned on her own terms — no shows, no seasons, no storytelling. Majority owner. The silence was never absence. It was the position.</p></div><div class="modal-section"><div class="modal-section-label">The refusal</div><p>Won\'t do storytelling. Won\'t do seasons. Won\'t do social media. Won\'t do interviews (first in 10 years). Won\'t accept the pace of fashion. "Fundamentally that is not the stuff that makes me happy."</p></div><div class="modal-section"><div class="modal-section-label">The private life</div><p>Baking, galleries, riding, clubbing, family, friends. "Constantly walking the tightrope between ensuring downtime and discovering inspiration."</p></div><div class="modal-quote">"I don\'t know why there has to be such a beginning and end in our industry. I don\'t know why it just can\'t be continuous."</div>'},therow:{n:"The Row",d:"Fashion · Mary-Kate + Ashley Olsen",body:'<div class="modal-section"><div class="modal-section-label">What makes them unique</div><p>Cast at nine months old. Personhood consumed by celebrity before they had selves. Built The Row as the exact inversion — anonymous, silent, authorless. Durable where the childhood work was disposable. Invisible where the childhood was overexposed.</p></div><div class="modal-section"><div class="modal-section-label">The refusal</div><p>Neither on Instagram. No press. No announcements of pregnancies or marriages. "Most of the time we\'re saying no to things so we can be more in control. That\'s what we protect."</p></div><div class="modal-section"><div class="modal-section-label">The body knows</div><p>Mary-Kate: "On the floor with some pins and some scissors." Ashley: "Adjusting and shaping a garment." Happiest when making.</p></div><div class="modal-quote">"Anonymity is a luxury as well."</div>'},lemaire:{n:"Christophe Lemaire",d:"Fashion",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Started at 19. Never learned pattern cutting — calls it his biggest regret. The entire label compensates: "chic and utilitarian" since 1991 is a man who perfects what his eye can do because his hands can\'t.</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>"All the unsung heroes of workwear and military wear. The unknown designers and pattern cutters who designed military wear, who worked at Levi\'s. That\'s real design."</p></div><div class="modal-section"><div class="modal-section-label">The private life</div><p>Not a fetishist, doesn\'t collect objects. Treasures a $2,500-rare piano LP by Su Tissue — a post-punk musician who made one minimalist record and vanished.</p></div><div class="modal-quote">"She made this beautiful piece of music, and then she disappeared."</div>'},robertson:{n:"Chad Robertson / Tartine",d:"Food",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Rootlessness. No fixed home, constant moving as a child, exchange students as best friends. Wherever he lands, he builds community through bread. SF, LA, Seoul — the bakery is the social infrastructure.</p></div><div class="modal-section"><div class="modal-section-label">Long patience</div><p>6 years developing grain with Washington State bread lab before using it at Tartine. "The big question was: when can I use these? And it took six years."</p></div><div class="modal-section"><div class="modal-section-label">The friction</div><p>His own team pushes back: "Chad, that\'s not Tartine." He fights stasis disguised as tradition. Wants to kill the morning bun but can\'t — working on making it excite him again.</p></div><div class="modal-quote">"We never mastered this. We never stopped learning. We can always do better."</div>'},nakamura:{n:"Hiroki Nakamura / Visvim",d:"Fashion · Craft",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Teenager drawn to American outdoor gear. Asked why it was cool. Realized it was the purpose, not the appearance. Spent 22 years closing the gap between surface and essence.</p></div><div class="modal-section"><div class="modal-section-label">The refusal</div><p>No TV, no newspapers, no movies — "nothing commercial." At antique markets, ignores the merchant and reads the maker\'s emotional state from the object.</p></div><div class="modal-section"><div class="modal-section-label">The ritual</div><p>Barefoot always. Coffee on the veranda. Billie Holiday from inside an Edo-period house. Drives a 1963 car that breaks down constantly. A Kyoto mechanic worked 3.5 hours and refused payment: "This repair is a gift from Kyoto."</p></div><div class="modal-quote">"No one can teach you, so you need to consciously try to feel for yourself."</div>'},portorocha:{n:"Porto Rocha",d:"Design · Leo Porto + Felipe Rocha",body:'<div class="modal-section"><div class="modal-section-label">What makes them unique</div><p>Felipe: from a very poor neighborhood in São Paulo. "If there wasn\'t any homophobia in Brazil, I would have pursued a career as a dancer. Design was a way to express my creativity, but it was not as gay." Leo: convinced everything from abroad was better, until his first internships.</p></div><div class="modal-section"><div class="modal-section-label">Partnership</div><p>Started freelancing together to spend time together as a couple. "People say don\'t mix dating and working, but it ended up working for us." Now 30 people. Rebranding MASP and Kunsthalle Basel — Brazilians designing for Swiss institutions.</p></div><div class="modal-quote">"My work got so much better when I understood that what is special about it is my background and where I come from."</div>'},sato:{n:"Oki Sato / Nendo",d:"Design · Architecture",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Born in Canada, arrived in Japan at 11. The outsider who sees what natives take for granted. "Mechanical pencils that extend when you shake them, erasers that collect shavings, candy lids that can be resealed. The things Japanese people take for granted are cool."</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>Shikinen Sengu: Ise Grand Shrine rebuilt every 20 years. No blueprints — only techniques passed down. "Not passing down things, but techniques." When nendo tried to recreate it, they couldn\'t make a model. Had Doraemon explain it in a comic strip.</p></div><div class="modal-quote">"It\'s like the joy of unexpectedly finding something you\'ve lost, even though buying something new is fun."</div>'},collins:{n:"Brian Collins / COLLINS",d:"Design",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Wanted to animate for Disney as a child. Yellow Ball Workshop, stop-motion with cardboard cutouts. Became a graphic designer. Brought animation INTO design — "brand behavior is motion behavior." The childhood desire became the adult conviction.</p></div><div class="modal-section"><div class="modal-section-label">Partnership</div><p>"Nothing great is made alone." Names every team member on every project. Both parents passed within two months — "my team accelerated while I was gone."</p></div><div class="modal-section"><div class="modal-section-label">The friction</div><p>"AI has eliminated the craft mode. Making it look polished and finished — that mode is gone. So now you have to have skills in storytelling, rhythm, pacing, visuality."</p></div><div class="modal-quote">"Make the future so irresistible it becomes inevitable."</div>'},reed:{n:"Jesse Reed / Order",d:"Design · Publishing",body:'<div class="modal-section"><div class="modal-section-label">What makes him unique</div><p>Youngstown, Ohio. $3,000 and a Craigslist air mattress. Three years of silence at Pentagram, absorbing Bierut. The disorder of arriving with nothing becomes the career of making everything legible.</p></div><div class="modal-section"><div class="modal-section-label">(Re)Sources</div><p>Found the NYCTA manual in Pentagram\'s basement while looking for a tarp. Gage & Tolner\'s original 1879 signage behind Arby\'s fake walls. "We go back into the archives and pull out some old logo and then make it that."</p></div><div class="modal-section"><div class="modal-section-label">The private life</div><p>Pop punk kid. Plays drums in Shark Swimmer. Eats Taco Bell before practice. Apartment is immaculate. Bobby Flay, when asked for a recipe: "Do I ask you how to do graphic design?"</p></div><div class="modal-quote">"My MO is that I just don\'t want to get fired or fuck something up."</div>'},moniker:{n:"Moniker / Luna Maurer + Roel Wouters",d:"Design · Interactive",body:'<div class="modal-section"><div class="modal-section-label">What makes them unique</div><p>Designed for the optimism of the early web — then watched platforms hollow it out. Two manifestos: Conditional Design (process over outcome) and Designing Friction (bringing physical engagement back to digital culture).</p></div><div class="modal-section"><div class="modal-section-label">The friction</div><p>"A ball rolling over a surface — they dance beautifully together, but they need each other." Roel: "It\'s not a metaphor. It might be the same force, literally. You need collision in order to engage."</p></div><div class="modal-section"><div class="modal-section-label">The refusal</div><p>Won\'t use AI as co-author. Experimented extensively. "When you use AI as a co-creator, it\'s often so boring. We got bored." No AI in the final film. "We can say more about AI by not using it."</p></div><div class="modal-quote">"One can only dance if the other one helps."</div>'}};
+function showLanding(){document.getElementById('landing').style.display='flex';document.querySelectorAll('.theme-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab')[0].classList.add('active')}
+function showTheme(id){document.getElementById('landing').style.display='none';document.querySelectorAll('.theme-page').forEach(p=>p.classList.remove('active'));const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));const map={backwards:'(Re)So',partnership:'Partner',outsiders:'Outsider',frictions:'Friction',rituals:'Ritual',originality:'Origin',directory:'A–Z',constellation:'Constell'};document.querySelectorAll('.nav-tab').forEach(t=>{if(map[id]&&t.textContent.includes(map[id]))t.classList.add('active')})}
+function openModal(id){const e=data[id];if(!e)return;document.getElementById('mName').textContent=e.n;document.getElementById('mDisc').textContent=e.d;document.getElementById('mBody').innerHTML=e.body;document.getElementById('modalBg').classList.add('open')}
+function closeModal(ev){if(ev.target===document.getElementById('modalBg'))document.getElementById('modalBg').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modalBg').classList.remove('open')});
+
+// CONSTELLATION — PAIR GENERATOR
+const pairData=[
+{id:"nakamura",n:"Nakamura / Visvim",d:"Fashion · Craft",themes:{
+backwards:"Teenager discovering American outdoor gear. Asked why it was cool. Realized it was the purpose, not the appearance. 22 years of one question.",
+frictions:"No TV, no newspapers, no movies. Drives a 1963 car that breaks down constantly. The inconvenience is the point.",
+rituals:"Barefoot. Coffee on the veranda. Billie Holiday from inside an Edo-period house. 22 years of the same mantra.",
+originality:"Teenager discovering outdoor gear in America. Just thought it was cool. Then asked why. That question became a career."}},
+{id:"robertson",n:"Robertson / Tartine",d:"Food",themes:{
+backwards:"Baking in a backyard in Marshall, California. 60 loaves, no permit. The encounter with bread at its most basic set the trajectory.",
+partnership:"His own team says 'Chad, that's not Tartine.' The system he built pushes back against his evolution. He pushes through.",
+outsiders:"Rootlessness. Constant moving as a child. Wherever he lands, he builds community through bread.",
+frictions:"6 years developing grain. Could have bought commercial flour. Chose to wait.",
+rituals:"Returns to grain. Returns to the backyard oven mentality. Returns to community in every new city.",
+originality:"Backyard in Marshall. Wood oven at 3am. Dollar 100 fine. The encounter with bread at its most basic."}},
+{id:"philo",n:"Phoebe Philo",d:"Fashion",themes:{
+frictions:"Rejects seasons, shows, the fashion calendar. Views her work as one continuous collection.",
+rituals:"One continuous collection. No beginning or end. Always returning to the same wardrobe, the same woman.",
+originality:"Refused the pace. Left Céline. Returned on her own terms. The entire label is built from the refusal."}},
+{id:"lemaire",n:"Lemaire",d:"Fashion",themes:{
+backwards:"The unsung heroes of workwear and military wear. The unknown designers who worked at Levis. Thats real design.",
+frictions:"A leather tab on the back waistband was pornography to his team. No logos. No style as social disguise.",
+rituals:"Still sketches, which is rare these days. The hand moves before the mind decides.",
+originality:"Never learned pattern cutting. Started at 19, tried school, had to stop. The gap became the edge."}},
+{id:"collins",n:"Collins",d:"Design",themes:{
+backwards:"Goes to the Letterform Archive. Went back to original 1950s hand-drawings of Neue Haas Grotesk.",
+frictions:"AI has eliminated the craft mode. That mode is gone. Now you need storytelling, rhythm, pacing.",
+rituals:"Drew Helvetica by hand for 6 months at 17. It becomes embedded in your neural net because its physiology.",
+originality:"Saw Chuck Jones lecture about Road Runner timing. The encounter with animation became a life in design that moves."}},
+{id:"moniker",n:"Moniker",d:"Design · Interactive",themes:{
+frictions:"All about comfort and ease. You dont have to sweat anymore. This mindset is not how we get connected.",
+rituals:"Dragged her family into a rainstorm to film something floating. We had the best time of our life.",
+originality:"Refused AI as co-author. Refused the frictionless. Dissolved the studio rather than continue on wrong terms."}},
+{id:"brown",n:"Cecily Brown",d:"Painting",themes:{
+backwards:"A magpie. Copies Hogarth, Snyders, Munch, Fragonard. I dont really know a work of art til Ive copied it.",
+frictions:"A really deep art shame. It was embarrassing. Varnished paintings to hide the gesture. Signed her first name to deflate the machismo.",
+rituals:"50 canvases at once. Cant paint from life — too hard. Keeps an ongoing list of titles. Things get abstract really quickly.",
+originality:"Painting was embarrassing in 90s London. Moved to New York. 25 years later: a Met retrospective."}},
+{id:"brule",n:"Brule / Monocle",d:"Publishing",themes:{
+backwards:"Built a magazine by travelling to the places, meeting the people, documenting whats already there.",
+outsiders:"Canadian in Zurich. There is an Anglo narrative of how we see the world. Chose to see from outside it.",
+frictions:"Instagram is great if youve got a hair salon. Record profitability year — all paper."}},
+{id:"browne",n:"Thom Browne",d:"Fashion",themes:{
+backwards:"Savile Row tailoring techniques applied to proportions nobody asked for. The tradition is the foundation he warps.",
+outsiders:"No fashion education. Failed actor. Sold his car. Made five suits and wore them on the street. People were horrified.",
+frictions:"Same suit every day. Cant sketch. Runs in tailored clothes. The uniform IS the authenticity. No gap between person and work.",
+rituals:"Same gray suit. Same breakfast. Same morning run. Every day for decades. The sameness creates a container for everything else to change.",
+originality:"Allentown said no. Sold his car. People were horrified by the short suit. The ridiculed thing became the identity."}},
+{id:"fox",n:"Toby Fox",d:"Gaming · Music",themes:{
+partnership:"Couldnt crack the OFF battle theme alone. Summoned Camellia to re-remix his track.",
+frictions:"Does the OFF music for free. Calls it fanmusic. Wont claim what isnt his.",
+originality:"Made Undertale essentially alone. Wont scale. Alright, see ya."}},
+{id:"therow",n:"The Row",d:"Fashion",themes:{
+outsiders:"Celebrity teenagers entering high fashion. Julie Gilhart at Barneys was hesitant. It sold out immediately.",
+frictions:"How many other people are called the girls when theyre designing? Were 37 years old.",
+rituals:"On the floor with some pins and some scissors. Asked where theyre happiest — the answer is the work itself.",
+originality:"Cast at nine months. Built the exact opposite — anonymous, silent, authorless."}},
+{id:"tyler",n:"Tyler, the Creator",d:"Music · Fashion",themes:{
+outsiders:"Weird kid mocked for liking Jamiroquai. No invitation to any scene. Built every scene himself.",
+frictions:"The parasocial fear. Millions think they know him. Fights hardest for the private self.",
+originality:"Refused to stop being weird. Every scene rejected him so he built every scene himself."}},
+{id:"vonghia",n:"Vo Trong Nghia",d:"Architecture",themes:{
+frictions:"I can meditate eight hours a day, to spend one hour doing good architecture. The 8:1 ratio is the resistance.",
+rituals:"Meditates 8 hours to spend 1 hour doing good architecture. The ratio IS the method.",
+originality:"Childhood depression. Cluster bombs. 1,000 days of meditation. Then: architecture that reconnects humans with nature."}},
+{id:"broskoski",n:"Broskoski / Are.na",d:"Technology",themes:{
+frictions:"Wont optimize for engagement. 15 years protecting conditions for active attention.",
+rituals:"15 years building one tool. Returns to the same problem every day. Aspires to a 1,300-year-old hot spring.",
+originality:"del.icio.us died. Nobody was building back the tool for intentional attention. So he did."}},
+{id:"kere",n:"Kere",d:"Architecture",themes:{
+backwards:"Community labor. Local materials. The village builds the school. The technique IS the architecture.",
+partnership:"Every child brings one stone each morning. Women prepare floors. Men press bricks. The entire population takes part. He draws plans in sand for people who cant read.",
+outsiders:"Sent away from his village at 7. Trained in Berlin. Returned to build what was missing. Carries two worlds.",
+rituals:"Berlin to Gando. Gando to Berlin. Constantly returning. Every trip back brings technical knowledge and takes communal knowledge. The return is the architecture.",
+originality:"Suffocating classroom with no ventilation, no light. 100 children. The school he needed didnt exist. So he built it. First African Pritzker laureate."}},
+{id:"reed",n:"Order / Reed",d:"Design · Publishing",themes:{
+backwards:"Found the NYCTA manual in Pentagram basement while looking for a tarp. The answer is always in what already exists.",
+rituals:"Returns to archives. NYCTA, NASA, Herman Miller, Gage and Tolner. The return is the method.",
+originality:"Youngstown, Ohio. 3,000 dollars and a Craigslist air mattress. One encounter in a basement launched a practice."}},
+{id:"kouthoofd",n:"Kouthoofd / TE",d:"Technology · Product",themes:{
+rituals:"Rehearses organ badly every night for 5 years — to design one. The practice precedes the product.",
+originality:"Father drew beautifully but couldnt sell. Made a company where product IS personality."}},
+{id:"sato",n:"Sato / Nendo",d:"Design · Architecture",themes:{
+backwards:"Shikinen Sengu: Ise Grand Shrine rebuilt every 20 years. No blueprints — only techniques passed down.",
+frictions:"Rejected the standard construction process. If the process is the same, the results will be similar.",
+originality:"Arrived in Japan at 11 from Canada. Mechanical pencils that extend when you shake them. The encounter with everyday design."}},
+{id:"satisfy",n:"Partouche / Satisfy",d:"Product · Running",themes:{
+rituals:"Designs while running. The run IS the design process. Practice IS product.",
+originality:"No brand existed for the run he experienced. The absence was the brief."}},
+{id:"portorocha",n:"Porto Rocha",d:"Design",themes:{
+outsiders:"If there wasnt homophobia in Brazil, I would have pursued a career as a dancer.",
+frictions:"Launched nofreepitches.com. 7,000 signatures. Changed the rule.",
+originality:"Accepted at Fabrica in Treviso. First time I traveled abroad. One encounter opened everything."}},
+{id:"zumthor",n:"Peter Zumthor",d:"Architecture",themes:{
+backwards:"Aunts door handle. The temperature of the brass, the weight, the sound of the latch.",
+rituals:"20-year buildings. Returns to the same sensory questions: what does the door handle feel like?",
+originality:"One childhood encounter with how a building feels to the body — and 50 years of architecture."}},
+{id:"arnold",n:"Daniel Arnold",d:"Photography",themes:{
+outsiders:"Self-taught. No credentials, no MFA. Depression as release valve.",
+rituals:"Walks 8 hours a day. Every day. The route changes. The walking doesnt.",
+originality:"Loneliness in a new city. Walked until the city became his."}},
+{id:"papaioannou",n:"Papaioannou",d:"Performance",themes:{
+outsiders:"Ran away at 18. Left painting for silent theater. Left Greece. Left language itself.",
+rituals:"The body IS the medium. A painter who left painting because the body could say what the brush couldnt.",
+originality:"Refused words. Refused painting. Refused Greece. Every refusal stripped away one more thing."}},
+{id:"blazy",n:"Blazy",d:"Fashion",themes:{
+rituals:"Beer not champagne. Walks alone. The private life was fixed long before Bottega arrived.",
+frictions:"20 years anonymous. Refusing to claim credit for work that wasnt ready to be claimed."}},
+{id:"toogood",n:"Faye Toogood",d:"Design · Furniture",themes:{
+frictions:"Hid femininity for years. Then: screw it. Circles, color, softness.",
+originality:"The refusal to keep suppressing herself became the entire aesthetic."}},
+{id:"escobedo",n:"Escobedo",d:"Architecture",themes:{
+outsiders:"Too shy for art. Chose architecture as safer. Made recessive buildings that dont impose.",
+originality:"The shyness wasnt overcome. It became the design principle."}},
+{id:"torrisi",n:"Torrisi / MFG",d:"Food",themes:{
+backwards:"Italian-American food from their own childhoods. Neon over the original Rocco sign. The past is the architecture of the restaurant.",
+partnership:"Three-person triad: chef, creative director, entrepreneur. Different skill sets, common goal. Sat down for six hours and discovered they were dreaming of the same restaurant.",
+outsiders:"Treated like kids. Rejected for the Vesuvio space. Italian-American fine dining wasnt taken seriously. Built an empire from the cuisine everyone dismissed.",
+originality:"Brokenhearted rejection for the Vesuvio space fueled everything after. Refused to accept that their cuisine wasnt worthy. The dismissal became the fuel."}},
+{id:"herndon",n:"Herndon / Dryhurst",d:"Music · AI",themes:{
+partnership:"Met through a podcast. Married a year later. 17 years together. The partnership is romantic, creative, and structural — built into the systems they make.",
+frictions:"Reject the binary: pro-AI or pro-artist. Built Spawning for consent. Too pro-AI for art, too pro-artist for tech. The loneliness of refusing either camp.",
+rituals:"Training ceremonies where participants sing to the AI. The practice of communal singing IS the model training. The ritual and the technology are one act.",
+originality:"East Tennessee church choir. Music as communion and ritual. That communal singing was lost when she left. Every project since rebuilds it with technology."}},
+{id:"anderson",n:"Jonathan Anderson",d:"Fashion",themes:{
+backwards:"Mind-maps. Cinema, fine art, kitsch, ceramics — everything fed into the work. Collects Arts and Crafts. Brings craftspeople into fashion.",
+frictions:"Describes himself as reserved, uncomfortable with the social role. Off social media. Doesnt keep his own clothes at home. The Dior director whose private life refuses to look like Dior.",
+rituals:"When stuck, cleans everything — every cupboard, every window. Physical activity as displacement for creative paralysis. Never finishes a collection until the day of the show.",
+originality:"Rugby family during the Troubles. Refused that path. Went to New York to act. Refused that too. Rejected from every school. Bankrupted multiple times. Kept refusing the thing that was working."}},
+{id:"kojima",n:"Kojima",d:"Gaming",themes:{
+backwards:"Parents nightly film-watching ritual continued into adulthood. Bookstores in every city. The Creative Gene maps every influence back to biography. Cultural consumption IS the method.",
+frictions:"Total authorship at industrial scale. Every camera angle hand-placed. Invented his own genre. Left Konami after 29 years rather than accept corporate control.",
+rituals:"30 years returning to the same subject: connection across isolation. Metal Gear, Death Stranding, Death Stranding 2. The same question in new forms. Films nightly. Bookstores obsessively.",
+originality:"Father died at 13. Came home to an empty house every day. That loneliness became the subject of every game. Death Stranding is literally a game about building connection from isolation."}},
+{id:"saarinen",n:"Saarinen / Linear",d:"Technology",themes:{
+partnership:"Three Finnish friends met every Wednesday at a bar for a year before quitting their jobs. Shared frustration, shared taste, shared calm. The permission came from each other.",
+frictions:"Designed for someone, not everyone. Opinionated defaults against customization. Finnish calm against Silicon Valley speed. Barely spent the 52 million they raised.",
+originality:"The ugly bicycle at age 7. Why do people make things ugly when they dont have to? That question became a career. Jira was the ugly bicycle of enterprise software."}},
+];
+let usedPairs=[];
+
+function generatePair(){
+  let attempts=0;
+  let a,b,sharedThemes;
+  do{
+    a=pairData[Math.floor(Math.random()*pairData.length)];
+    b=pairData[Math.floor(Math.random()*pairData.length)];
+    sharedThemes=Object.keys(a.themes).filter(t=>b.themes[t]);
+    attempts++;
+  }while((a.id===b.id||a.d===b.d||sharedThemes.length===0||usedPairs.includes(a.id+'-'+b.id))&&attempts<200);
+  if(a.id===b.id||sharedThemes.length===0){usedPairs=[];return generatePair();}
+  usedPairs.push(a.id+'-'+b.id);
+  if(usedPairs.length>30)usedPairs=[];
+  const theme=sharedThemes[Math.floor(Math.random()*sharedThemes.length)];
+  const themeLabels={backwards:'(Re)Sources',partnership:'Partnership',outsiders:'Outsiders',frictions:'Frictions',rituals:'Rituals',originality:'Origins'};
+  const clusterHints={backwards:'Drawing from the past',partnership:'Shaped by others',outsiders:'Coming from outside',frictions:'Resisting something',rituals:'The repeated practice',originality:'Where it started'};
+  document.getElementById('pairA').innerHTML=
+    '<div class="pc-name">'+a.n+'</div>'+
+    '<div class="pc-discipline">'+a.d+'</div>'+
+    '<div class="pc-detail">'+a.themes[theme]+'</div>';
+  document.getElementById('pairB').innerHTML=
+    '<div class="pc-name">'+b.n+'</div>'+
+    '<div class="pc-discipline">'+b.d+'</div>'+
+    '<div class="pc-detail">'+b.themes[theme]+'</div>';
+  document.getElementById('pairShared').innerHTML=
+    '<div class="ps-label">Both share</div>'+
+    '<div class="ps-theme">'+themeLabels[theme]+'</div>'+
+    '<div class="ps-cluster">'+clusterHints[theme]+'</div>';
+}
+
+const origShowTheme=showTheme;
+showTheme=function(id){origShowTheme(id);if(id==='constellation'){generatePair();}};
+</script>
+</body>
+</html>
