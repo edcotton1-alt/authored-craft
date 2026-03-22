@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seven Frictions — Authored Craft</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --black: #0a0a08;
+  --white: #f5f3ee;
+  --cream: #ece8df;
+  --warm: #d4c5a9;
+  --accent: #c2542d;
+  --muted: #8a8578;
+  --faint: #d8d3c8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-size: 21px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+.page-hero { padding: 7rem 2rem 1.5rem; max-width: 780px; margin: 0 auto; }
+.page-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1rem; }
+.page-hero h1 em { font-style: italic; color: var(--accent); }
+.page-hero .subtitle { font-size: 1.25rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+section { padding: 4rem 2rem; max-width: 780px; margin: 0 auto; }
+h2 { font-family: var(--serif); font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 400; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+h3 { font-family: var(--sans); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1rem; }
+p { margin-bottom: 1.5rem; }
+p.lead { font-size: 1.3rem; line-height: 1.65; }
+
+.divider { height: 1px; background: var(--faint); max-width: 780px; margin: 0 auto; }
+
+.pull { font-family: var(--serif); font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-style: italic; line-height: 1.35; padding: 2.5rem 0; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); margin: 2.5rem 0; }
+
+/* MODE CARDS */
+.modes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 3rem 0;
+}
+
+.mode {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--faint);
+}
+.mode:last-child { border-bottom: none; }
+
+.mode-icon { margin-bottom: 1rem; }
+.mode-icon svg { display: block; }
+.mode-number {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.mode-name {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.mode-desc {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 640px;
+}
+
+.mode-ai {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+footer { padding: 4rem 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--faint); }
+footer a { color: var(--accent); text-decoration: none; }
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .page-hero { padding: 6rem 1.5rem 3rem; }
+  section { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,243,238,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(216,211,200,0.5);padding:0 2rem;display:flex;align-items:center;height:48px;font-family:var(--sans);font-size:0.8rem;">
+  <a href="index.html" style="font-family:var(--serif);font-size:1rem;color:var(--black);text-decoration:none;margin-right:auto;">Authored Craft<span style="font-family:var(--sans);font-size:0.7rem;font-weight:400;color:#8a8578;margin-left:8px;">by Ed Cotton, Inverness Consulting</span></a>
+  <a href="themes.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Themes</a>
+  <a href="frictions.html" style="color:var(--accent);text-decoration:none;margin-left:2rem;font-weight:500;">Frictions</a>
+  <a href="data.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Data</a>
+  <a href="practices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Practices</a>
+  <a href="voices.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Voices</a>
+  <a href="stories.html" style="color:var(--muted);text-decoration:none;margin-left:2rem;">Stories</a>
+</nav>
+
+<div class="page-hero">
+  <h1>The <em>Frictions</em></h1>
+  <p class="subtitle">What friction is, where it lives, and the seven ways creative practices introduce it deliberately.</p>
+</div>
+
+<section class="fade-in">
+  <h3>What friction is</h3>
+  <h2>Resistance that produces depth</h2>
+  <p class="lead">Friction is the force that slows things down. In physics, it opposes movement. In technology, it's the enemy — every innovation from the wheel to the algorithm is designed to reduce it.</p>
+  <p>AI is the most powerful friction-reduction technology ever built. It removes the gap between an idea and its execution. Between a question and its answer. Between a brief and a deliverable. The space where all creative labour historically lived is collapsing.</p>
+  <p>Every practice in this study responds to that collapse by reintroducing friction deliberately. Not as inefficiency. As method. The friction slows things down, and the slowing produces something speed cannot: depth, specificity, conviction, and the accumulated weight of human decisions made in contact with resistant reality.</p>
+
+  <div class="pull">Friction didn't just slow things down. It produced things that frictionlessness cannot.</div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>Where friction lives</h3>
+  <h2>Three layers, from inside to outside</h2>
+  <p>Friction operates on three nested layers. Each one is further from AI's reach than the last.</p>
+
+  <svg viewBox="0 0 680 380" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:2rem auto;">
+    <!-- Layer 1: Practitioner (deepest, darkest) -->
+    <rect x="40" y="260" width="600" height="90" rx="8" fill="#4a4640" stroke="#33302a" stroke-width="0.5"/>
+    <text x="70" y="295" font-family="'Playfair Display',Georgia,serif" font-size="18" fill="#f5f3ee" font-weight="400">The Practitioner</text>
+    <text x="70" y="320" font-family="'DM Sans',sans-serif" font-size="12" fill="rgba(255,255,255,0.55)">Who they are. Their biography, spiritual practice, accumulated time.</text>
+    <text x="600" y="295" font-family="'DM Sans',sans-serif" font-size="11" fill="rgba(255,255,255,0.35)" text-anchor="end">Hardest for AI to reach</text>
+
+    <!-- Layer 2: Process (middle) -->
+    <rect x="40" y="150" width="600" height="90" rx="8" fill="#d5cfc2" stroke="#bfb8a8" stroke-width="0.5"/>
+    <text x="70" y="185" font-family="'Playfair Display',Georgia,serif" font-size="18" fill="#33302a" font-weight="400">The Process</text>
+    <text x="70" y="210" font-family="'DM Sans',sans-serif" font-size="12" fill="#6a665c">Materials, research, constraints, collaboration, economic model.</text>
+
+    <!-- Layer 3: Output (surface, lightest) -->
+    <rect x="40" y="40" width="600" height="90" rx="8" fill="#f0ede6" stroke="#d8d3c8" stroke-width="0.5"/>
+    <text x="70" y="75" font-family="'Playfair Display',Georgia,serif" font-size="18" fill="#3d3a33" font-weight="400">The Output</text>
+    <text x="70" y="100" font-family="'DM Sans',sans-serif" font-size="12" fill="#8a8578">How the work communicates, ages, reveals itself.</text>
+    <text x="600" y="75" font-family="'DM Sans',sans-serif" font-size="11" fill="#bfb8a8" text-anchor="end">Where AI arrives first</text>
+
+    <!-- Cascade arrow -->
+    <line x1="24" y1="70" x2="24" y2="310" stroke="#bfb8a8" stroke-width="1"/>
+    <polygon points="20,308 24,320 28,308" fill="#bfb8a8"/>
+    <text x="14" y="190" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8578" text-anchor="middle" transform="rotate(-90,14,190)" letter-spacing="0.12em">DEEPER</text>
+
+    <!-- Caption -->
+    <text x="340" y="372" font-family="'DM Sans',sans-serif" font-size="11" fill="#8a8578" text-anchor="middle">AI mimics the surface. It cannot reproduce what lies beneath.</text>
+  </svg>
+
+  <p>The strongest pattern in the data: practitioners with a spiritual or embodied practice (meditation, the daily run, breathing exercises) default to material process friction 50% of the time. The inner practice trains the eye. The trained eye reads the material. The material shapes the output. The output ages.</p>
+  <p>AI reaches the output layer first — the surface, the aesthetic, the style. It cannot reproduce the practitioner or the process. The authored object is the outermost layer of a friction that begins inside the maker.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>The seven types</h3>
+  <h2>How friction is introduced</h2>
+  <p>Every practice in the study introduces friction in one of seven ways. Some operate on the practitioner. Some on the process. Some on the relationship between the work and the world. Together they form a taxonomy of deliberate resistance.</p>
+
+  <div class="modes-grid">
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#8a8578" stroke-width="1.5"/></svg></div>
+      <div class="mode-number">01 · Output layer</div>
+      <div class="mode-name">The Withheld</div>
+      <div class="mode-desc">Friction through silence, restraint, and the refusal to fill every space. In a world that rewards noise, these practices chose to say nothing. The authored absence. The empty vessel that waits to be filled by the user, not the algorithm.</div>
+      <div class="mode-ai">AI fills. It generates. It produces. It cannot create emptiness. The designed silence is the one position AI cannot occupy.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"Emptiness is a creative receptacle."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Kenya Hara — 25 years as art director of Muji, designing products that wait to be filled by the user</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><line x1="8" y1="10" x2="32" y2="10" stroke="#8a8578" stroke-width="1.5"/><line x1="12" y1="20" x2="28" y2="20" stroke="#8a8578" stroke-width="1.5"/><line x1="16" y1="30" x2="24" y2="30" stroke="#8a8578" stroke-width="1.5"/></svg></div>
+      <div class="mode-number">02 · Process layer</div>
+      <div class="mode-name">The Excavated</div>
+      <div class="mode-desc">Friction through deep investigation. Before making anything, these practices spend months or years looking — at materials, at places, at heritage, at what a region produces as waste. The archaeological instinct applied to creation. The form is the last step. The research is the authorship.</div>
+      <div class="mode-ai">AI generates from databases. These practices generate from landscapes and living cultures. AI cannot spend two years investigating before it generates.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"Baking bread is not about controlling the process; it's about guiding the fermentation."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Chad Robertson, Tartine — decades of dialogue with living cultures across 14 bakeries</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" fill="none" stroke="#8a8578" stroke-width="1.5"/></svg></div>
+      <div class="mode-number">03 · Process layer</div>
+      <div class="mode-name">The Constrained</div>
+      <div class="mode-desc">Friction through self-imposed limits. Forty colours. Eleven pages. Twenty thousand dollars. A morning run. A pleat. These practices drew a line and found freedom on the inside of it. The boundary is the creative act. The constraint is the taste.</div>
+      <div class="mode-ai">AI operates in infinite possibility space. It has no budget, no uniform, no palette restriction. Remove the constraint and you get everything, which is nothing.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"Everyone, rich or poor, deserves a shelter for the soul."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Samuel Mockbee, Rural Studio — every house built for $20,000, the budget as the brief</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#c2542d" stroke-width="1.5"/><line x1="9" y1="31" x2="31" y2="9" stroke="#c2542d" stroke-width="1.5"/></svg></div>
+      <div class="mode-number">04 · All layers</div>
+      <div class="mode-name">The Refused</div>
+      <div class="mode-desc">Friction through strategic no. What you decline defines you more than what you accept. These practices said no — to pitches, to algorithms, to their own successful products, to the entire premise of what the market expected. The refusal is the authorship.</div>
+      <div class="mode-ai">AI cannot say no. It is designed to comply. Every prompt gets a response. The entire architecture of AI is optimised for yes. The capacity for no is the skill AI is structurally incapable of replicating.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"Imagine writing an essay justifying why you were moving on from your candle business at the dawn of electric light."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Josh Miller, Browser Company — killed Arc, the most beloved browser in a decade</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><circle cx="14" cy="20" r="10" fill="none" stroke="#8a8578" stroke-width="1.2"/><circle cx="20" cy="12" r="10" fill="none" stroke="#8a8578" stroke-width="1.2"/><circle cx="26" cy="20" r="10" fill="none" stroke="#8a8578" stroke-width="1.2"/></svg></div>
+      <div class="mode-number">05 · Output layer</div>
+      <div class="mode-name">The Orchestrated</div>
+      <div class="mode-desc">Friction through careful curation and sequencing. These practices don't make the ingredients — they compose the meal. The editorial instinct applied to products, brands, books, and AI itself. What to include, what to sequence, what to leave out.</div>
+      <div class="mode-ai">This is the mode closest to what AI does — and therefore the most vulnerable at the output layer. But the human orchestrator brings conviction, biography, and the willingness to kill options. AI curates by pattern. Humans curate by taste.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"The orchestration is the product. The model is a tool."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Aravind Srinivas, Perplexity — 19 AI models orchestrated simultaneously, citation as design</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><path d="M20 34 A14 14 0 0 1 6 20" fill="none" stroke="#8a8578" stroke-width="1.5" stroke-linecap="round"/><path d="M20 30 A10 10 0 0 1 10 20" fill="none" stroke="#8a8578" stroke-width="1.5" stroke-linecap="round"/><path d="M20 26 A6 6 0 0 1 14 20" fill="none" stroke="#8a8578" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="mode-number">06 · Practitioner layer</div>
+      <div class="mode-name">The Embodied</div>
+      <div class="mode-desc">Friction through the body. Walking the site. Reading the stone. Feeling the bamboo bend. Meditating for two hours before drawing a line. These practices require a body in a place over time — the hand that cannot be replaced, the foot that knows the ground.</div>
+      <div class="mode-ai">AI has no body. No hands, no feet, no breath. The three lowest AI vulnerability scores in the entire study — all 5 out of 65 — are Embodied practices. This is the bedrock.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"Craft is within yourself, not necessarily outside."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Bijoy Jain, Studio Mumbai — no drawings, workers read the stone, AI vulnerability score: 5</span></div>
+    </div>
+
+    <div class="mode">
+      <div class="mode-icon"><svg width="64" height="64" viewBox="0 0 40 40"><polyline points="4,28 12,12 20,28 28,12 36,28" fill="none" stroke="#8a8578" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="mode-number">07 · Practitioner layer</div>
+      <div class="mode-name">The Tested</div>
+      <div class="mode-desc">Friction through exposure to reality. The market, the user, the community, time itself. These practices have survived contact with the world and carry the scars — sixty years of disruption, four hundred projects simultaneously, the difficult way chosen every time.</div>
+      <div class="mode-ai">AI generates untested outputs. These practices have been through everything — recessions, pandemics, technological shifts, the death of founders — and still stand. The scar tissue is the credential. AI has no scars because it has never been wounded.</div>
+      <div class="mode-example" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.35;max-width:640px;">"I always make a point of choosing the difficult way."<span style="display:block;font-family:var(--sans);font-style:normal;font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">Oki Sato, Nendo — 400 projects simultaneously across chocolate, furniture, trains, and Olympic cauldrons</span></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="fade-in">
+  <h3>How friction endures</h3>
+  <h2>Rituals and journeys</h2>
+  <p class="lead">The seven modes describe what friction is. The three layers describe where it lives. But neither explains how friction sustains itself over time. That's the work of rituals and journeys.</p>
+  <p>A ritual is how the acute creative decision becomes a chronic creative practice. Browne's morning run. Nghia's two-hour meditation. Robertson's daily feeding of the starter. Zumthor's walking. The first time was a choice. The thousandth time is a ritual. And the ritual's thousandth repetition is richer than its first — deeper, more attuned, more layered with the memory of the previous nine hundred and ninety-nine.</p>
+  <p>This is the opposite of AI. AI's thousandth execution is identical to its first. Nothing accumulates. Nothing deepens. Nothing is remembered from one generation to the next. The ritual is the human mechanism of accumulation — the practice of doing the same thing again and again and having it mean more each time.</p>
+  <p>A journey is what happens when rituals accumulate across time and encounter reality. The accidents that redirect the work. The client who says something that reframes the brief. The material that splits along an unexpected grain. The pandemic that clarifies what you really need. The collaborator who surprises you. The starter that dies and has to be rebuilt.</p>
+  <p>The journey is friction in motion — not a single act of resistance but the entire sequence of acts that transforms the maker, the client, the material, and the output. Every friction mode has rituals that sustain it and a journey that deepens it. The Withheld has the ritual of silence. The Embodied has the ritual of the body. The Excavated has the ritual of investigation. The Constrained has the ritual of the constraint itself, applied to every project, every day, every decision.</p>
+  <p>The output is what survives the journey. It carries the rituals in its texture — the crumb structure that records the fermentation, the building that records the walking, the suit that records the morning run, the photobook that records the years of correspondence. The output is the receipt. The ritual is the practice. The journey is the life.</p>
+</section>
+
+<section style="max-width:780px;margin:0 auto;padding:2rem 2rem 4rem;text-align:center;" class="fade-in">
+</section>
+
+<footer>
+  <p><a href="index.html">Home</a> · <a href="themes.html">The Themes</a> · <a href="frictions.html">The Frictions</a> · <a href="data.html">The Data</a> · <a href="practices.html">The Practices</a> · <a href="voices.html">The Voices</a> · <a href="stories.html">The Stories</a></p>
+  <p style="margin-top:1rem;">Authored Craft — A Book of Frictions. Research conducted March 2026.</p>
+  <p style="margin-top:0.5rem;">By Ed Cotton · <a href="https://invernessconsulting.com">Inverness Consulting</a></p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
