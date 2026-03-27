@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play the Artist — The Creative Resistance</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f6;
+  --fg: #1c1c1a;
+  --dim: #8a8880;
+  --faint: #c8c4bc;
+  --accent: #b33a2a;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.back {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  text-decoration: none;
+  z-index: 10;
+  letter-spacing: 0.02em;
+}
+.back:hover { color: var(--fg); }
+.wrap {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.page-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dim);
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+.scene { display: none; }
+.scene.active { display: block; }
+.sc-num {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--faint);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.sc-text {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+.opts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.opt {
+  background: none;
+  border: 1px solid var(--faint);
+  border-radius: 0;
+  padding: 14px 16px;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--fg);
+  cursor: pointer;
+  line-height: 1.55;
+  transition: border-color 0.2s, background 0.2s;
+}
+.opt:hover {
+  border-color: var(--dim);
+  background: rgba(0,0,0,0.015);
+}
+.opt:active { transform: scale(0.995); }
+.ol {
+  font-weight: 500;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+.od {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--dim);
+  line-height: 1.55;
+}
+
+.result {
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+.result.vis { opacity: 1; }
+.rt {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.rd {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--dim);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+.rl { margin: 24px 0 28px; }
+.rm {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dim);
+  line-height: 1.6;
+}
+.rm strong {
+  font-weight: 400;
+  color: var(--fg);
+}
+.restart {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--faint);
+  cursor: pointer;
+  margin-top: 32px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--faint);
+  display: inline-block;
+}
+.restart:hover {
+  color: var(--dim);
+  border-color: var(--dim);
+}
+
+@media (max-width: 500px) {
+  .wrap { padding: 60px 16px 80px; }
+  .page-title { font-size: 18px; }
+  .sc-text { font-size: 13px; }
+  .ol { font-size: 12px; }
+  .od { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← back</a>
+
+<div class="wrap">
+
+<div class="page-title">Play the artist</div>
+<div class="page-sub">A creative life in seven decisions. Based on 65 real ones.</div>
+
+<div class="scene active" id="s0">
+<div class="sc-num">Before you begin</div>
+<div class="sc-text">You didn't choose where you started. Nobody does.</div>
+<div class="opts">
+<button class="opt" onclick="choose(0,'craft_family')"><div class="ol">You grew up around making</div><div class="od">A parent who built things. The smell of wood or paint or flour before you could name it.</div></button>
+<button class="opt" onclick="choose(0,'personal_past')"><div class="ol">Something happened to you early</div><div class="od">A war. A loss. A move. A fracture in the family. You carry it whether you want to or not.</div></button>
+<button class="opt" onclick="choose(0,'archive')"><div class="ol">You were surrounded by culture</div><div class="od">Books, records, museums. Someone showed you the world before you could go find it yourself.</div></button>
+<button class="opt" onclick="choose(0,'none')"><div class="ol">Nothing was given</div><div class="od">No connections. No craft. No culture. You start from zero.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s1">
+<div class="sc-num">The encounter</div>
+<div class="sc-text">Something happens. You see something, taste something, hear something — and a door opens.</div>
+<div class="opts">
+<button class="opt" onclick="choose(1,'wrong_room')"><div class="ol">You walk into the wrong room</div><div class="od">Wrong degree. Wrong career. Wrong discipline. But something in that room speaks to you.</div></button>
+<button class="opt" onclick="choose(1,'uninvited')"><div class="ol">You show up uninvited</div><div class="od">No one asked you to come. No credentials. No invitation. You just start.</div></button>
+<button class="opt" onclick="choose(1,'self_exile')"><div class="ol">You leave on purpose</div><div class="od">You walk away from something that was working to find something you can't name yet.</div></button>
+<button class="opt" onclick="choose(1,'immigrant')"><div class="ol">You cross into another world</div><div class="od">Another country. Another culture. Another discipline. The gap between the two worlds is where you see clearly.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s2">
+<div class="sc-num">The wall</div>
+<div class="sc-text">The world pushes back.</div>
+<div class="opts">
+<button class="opt" onclick="choose(2,'push_through')"><div class="ol">You go through it</div><div class="od">Break and rebuild. Learn the lesson. Come back harder.</div></button>
+<button class="opt" onclick="choose(2,'refuse')"><div class="ol">You refuse the terms</div><div class="od">The system says this is how it works. You say no.</div></button>
+<button class="opt" onclick="choose(2,'carry')"><div class="ol">You carry it</div><div class="od">The wound doesn't heal. You let the work make it visible.</div></button>
+<button class="opt" onclick="choose(2,'build_missing')"><div class="ol">You build what's missing</div><div class="od">The thing you need doesn't exist. So you make it.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s3">
+<div class="sc-num">The practice</div>
+<div class="sc-text">The drama fades. What's left is the daily act.</div>
+<div class="opts">
+<button class="opt" onclick="choose(3,'fixed_routine')"><div class="ol">The same thing every day</div><div class="od">Same routine. Same tools. Same walk. The sameness is the container.</div></button>
+<button class="opt" onclick="choose(3,'practice_is_work')"><div class="ol">The doing is the making</div><div class="od">The ritual and the work are the same activity.</div></button>
+<button class="opt" onclick="choose(3,'return')"><div class="ol">You keep going back</div><div class="od">Same place, same material, same question. Slightly different each time.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s4">
+<div class="sc-num">The friction</div>
+<div class="sc-text">Something pushes against the work. From inside or outside.</div>
+<div class="opts">
+<button class="opt" onclick="choose(4,'ease')"><div class="ol">Things getting too easy</div><div class="od">Comfort. Frictionlessness. The removal of effort removes the reason to engage.</div></button>
+<button class="opt" onclick="choose(4,'systems')"><div class="ol">The rules</div><div class="od">The calendar. The algorithm. The hierarchy. The way things are supposed to work.</div></button>
+<button class="opt" onclick="choose(4,'authenticity')"><div class="ol">Not being true to yourself</div><div class="od">The surface doesn't match the inside. The label someone else wrote for you.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s5">
+<div class="sc-num">The cost</div>
+<div class="sc-text">Every creative life has a shadow life that didn't happen.</div>
+<div class="opts">
+<button class="opt" onclick="choose(5,'comfort')"><div class="ol">Comfort and security</div><div class="od">The stable job. The pension. The life that made sense to your parents.</div></button>
+<button class="opt" onclick="choose(5,'visibility')"><div class="ol">Being seen</div><div class="od">No press. No interviews. No social media. The work speaks. You don't.</div></button>
+<button class="opt" onclick="choose(5,'scale')"><div class="ol">Scale</div><div class="od">You could be bigger. You chose not to.</div></button>
+<button class="opt" onclick="choose(5,'belonging')"><div class="ol">Belonging</div><div class="od">No scene claims you. The loneliness is the price of the vantage point.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s6">
+<div class="sc-num">The stance</div>
+<div class="sc-text">Not what you make. What you won't.</div>
+<div class="opts">
+<button class="opt" onclick="choose(6,'no_speed')"><div class="ol">You won't go faster</div><div class="od">The work takes as long as it takes.</div></button>
+<button class="opt" onclick="choose(6,'no_scale')"><div class="ol">You won't get bigger</div><div class="od">The thing stays the size it needs to be.</div></button>
+<button class="opt" onclick="choose(6,'no_compromise')"><div class="ol">You won't bend</div><div class="od">No notes. No focus groups. The work is the work.</div></button>
+<button class="opt" onclick="choose(6,'no_explain')"><div class="ol">You won't explain</div><div class="od">If you have to explain it, you've already lost.</div></button>
+</div>
+</div>
+
+<div class="scene" id="s7">
+<div class="result" id="res"></div>
+</div>
+
+</div>
+
+<script>
+var choices = [];
+
+var practitioners = [
+{n:'Marina Abramović',i:'personal_past',o:'self_exile',w:'carry',p:'practice_is_work',f:'authenticity'},
+{n:'Jonathan Anderson',i:'personal_past',o:'self_exile',w:'refuse',p:'fixed_routine',f:'authenticity'},
+{n:'Christopher Anderson',i:'none',o:'wrong_room',w:'push_through',p:'practice_is_work',f:'none'},
+{n:'Daniel Arnold',i:'none',o:'uninvited',w:'carry',p:'fixed_routine',f:'none'},
+{n:'Matthieu Blazy',i:'none',o:'none',w:'refuse',p:'fixed_routine',f:'authenticity'},
+{n:'Simone Bodmer-Turner',i:'craft_family',o:'wrong_room',w:'push_through',p:'return',f:'ease'},
+{n:'Charles Broskoski / Are.na',i:'long_commitment',o:'self_exile',w:'build_missing',p:'return',f:'ease'},
+{n:'Cecily Brown',i:'archive',o:'none',w:'carry',p:'practice_is_work',f:'authenticity'},
+{n:'Thom Browne',i:'craft_family',o:'uninvited',w:'refuse',p:'fixed_routine',f:'authenticity'},
+{n:'Tyler Brûlé / Monocle',i:'archive',o:'self_exile',w:'refuse',p:'none',f:'ease'},
+{n:'Sophie Calle',i:'archive',o:'self_exile',w:'carry',p:'practice_is_work',f:'authenticity'},
+{n:'Sougwen Chung',i:'none',o:'wrong_room',w:'push_through',p:'practice_is_work',f:'systems'},
+{n:'Brian Collins / COLLINS',i:'archive',o:'wrong_room',w:'push_through',p:'practice_is_work',f:'ease'},
+{n:'Alex Da Corte',i:'long_commitment',o:'self_exile',w:'refuse',p:'none',f:'none'},
+{n:'Es Devlin',i:'personal_past',o:'none',w:'push_through',p:'none',f:'none'},
+{n:'Molly Dineen',i:'craft_family',o:'wrong_room',w:'push_through',p:'practice_is_work',f:'authenticity'},
+{n:'Frida Escobedo',i:'none',o:'wrong_room',w:'refuse',p:'none',f:'none'},
+{n:'Ffern',i:'none',o:'none',w:'refuse',p:'return',f:'authenticity'},
+{n:'Dylan Field / Figma',i:'none',o:'none',w:'refuse',p:'none',f:'none'},
+{n:'David Fincher',i:'personal_past',o:'uninvited',w:'push_through',p:'practice_is_work',f:'systems'},
+{n:'Formafantasma',i:'archive',o:'none',w:'refuse',p:'none',f:'systems'},
+{n:'Toby Fox',i:'none',o:'none',w:'refuse',p:'none',f:'authenticity'},
+{n:'Floating Points',i:'none',o:'wrong_room',w:'push_through',p:'none',f:'none'},
+{n:'Sou Fujimoto',i:'craft_family',o:'wrong_room',w:'push_through',p:'fixed_routine',f:'none'},
+{n:'Gaggan Anand',i:'none',o:'uninvited',w:'carry',p:'none',f:'none'},
+{n:'Lina Ghotmeh',i:'personal_past',o:'none',w:'carry',p:'none',f:'none'},
+{n:'Holly Herndon & Mat Dryhurst',i:'none',o:'none',w:'carry',p:'practice_is_work',f:'systems'},
+{n:'Aktar Islam',i:'craft_family',o:'wrong_room',w:'push_through',p:'fixed_routine',f:'authenticity'},
+{n:'Kahlil Joseph',i:'none',o:'none',w:'carry',p:'none',f:'none'},
+{n:'Diébédo Francis Kéré',i:'craft_family',o:'immigrant',w:'carry',p:'return',f:'none'},
+{n:'Hideo Kojima',i:'personal_past',o:'none',w:'carry',p:'return',f:'systems'},
+{n:'Jesper Kouthoofd / Teenage Engineering',i:'none',o:'none',w:'build_missing',p:'fixed_routine',f:'none'},
+{n:'Christophe Lemaire',i:'craft_family',o:'wrong_room',w:'build_missing',p:'practice_is_work',f:'systems'},
+{n:'Loose Joints',i:'long_commitment',o:'self_exile',w:'refuse',p:'none',f:'none'},
+{n:'Moniker',i:'long_commitment',o:'self_exile',w:'refuse',p:'practice_is_work',f:'ease'},
+{n:'MSCHF',i:'none',o:'uninvited',w:'refuse',p:'none',f:'none'},
+{n:'Hiroki Nakamura / Visvim',i:'craft_family',o:'self_exile',w:'push_through',p:'fixed_routine',f:'ease'},
+{n:'Neri&Hu',i:'none',o:'none',w:'refuse',p:'none',f:'none'},
+{n:'Trevor Paglen',i:'none',o:'wrong_room',w:'refuse',p:'none',f:'systems'},
+{n:'Dimitris Papaioannou',i:'none',o:'self_exile',w:'refuse',p:'practice_is_work',f:'none'},
+{n:'Perplexity / Escha Vera',i:'none',o:'wrong_room',w:'push_through',p:'none',f:'none'},
+{n:'Willo Perron',i:'none',o:'immigrant',w:'refuse',p:'none',f:'none'},
+{n:'Phoebe Philo',i:'personal_past',o:'self_exile',w:'refuse',p:'return',f:'systems'},
+{n:'Porto Rocha',i:'none',o:'wrong_room',w:'push_through',p:'none',f:'systems'},
+{n:'Richard Prince',i:'long_commitment',o:'self_exile',w:'refuse',p:'none',f:'none'},
+{n:'Jesse Reed / Order',i:'archive',o:'wrong_room',w:'push_through',p:'return',f:'none'},
+{n:'Gerhard Richter',i:'archive',o:'immigrant',w:'carry',p:'practice_is_work',f:'authenticity'},
+{n:'Chad Robertson / Tartine',i:'craft_family',o:'immigrant',w:'push_through',p:'return',f:'ease'},
+{n:'Karri Saarinen / Linear',i:'none',o:'none',w:'build_missing',p:'none',f:'systems'},
+{n:'Brice Partouche / Satisfy',i:'long_commitment',o:'none',w:'build_missing',p:'practice_is_work',f:'none'},
+{n:'Oki Sato / Nendo',i:'long_commitment',o:'immigrant',w:'push_through',p:'none',f:'systems'},
+{n:'George Saunders',i:'craft_family',o:'wrong_room',w:'push_through',p:'practice_is_work',f:'authenticity'},
+{n:'Tré Seals / Vocal Type',i:'none',o:'uninvited',w:'carry',p:'none',f:'none'},
+{n:'Taryn Simon',i:'none',o:'none',w:'refuse',p:'none',f:'authenticity'},
+{n:'Snøhetta',i:'long_commitment',o:'none',w:'refuse',p:'none',f:'none'},
+{n:'The Row',i:'personal_past',o:'uninvited',w:'refuse',p:'practice_is_work',f:'systems'},
+{n:'Faye Toogood',i:'none',o:'none',w:'refuse',p:'none',f:'authenticity'},
+{n:'Torrisi / Major Food Group',i:'archive',o:'uninvited',w:'refuse',p:'none',f:'none'},
+{n:'Luc Tuymans',i:'craft_family',o:'wrong_room',w:'push_through',p:'fixed_routine',f:'authenticity'},
+{n:'Tyler, the Creator',i:'personal_past',o:'uninvited',w:'refuse',p:'none',f:'authenticity'},
+{n:'Sumayya Vally',i:'none',o:'uninvited',w:'refuse',p:'none',f:'none'},
+{n:'Verdy',i:'none',o:'none',w:'refuse',p:'none',f:'none'},
+{n:'Vo Trong Nghia',i:'craft_family',o:'none',w:'carry',p:'practice_is_work',f:'ease'},
+{n:'Grace Wales Bonner',i:'archive',o:'immigrant',w:'push_through',p:'none',f:'none'},
+{n:'Peter Zumthor',i:'craft_family',o:'none',w:'push_through',p:'return',f:'none'}
+];
+
+var fields = ['i','o','w','p','f'];
+
+var archetypes = {
+  push_through: {
+    name: 'The reckoning',
+    desc: 'You broke and rebuilt harder. The lesson burned in. Everything after was built from the wreckage of what came before.',
+    path: 'M0,48 L80,38 L160,26 L200,50 L215,54 L230,44 L300,16 L420,10 L560,8'
+  },
+  refuse: {
+    name: 'The shedding',
+    desc: 'You said no and kept saying it. Each refusal stripped something away until only the essential remained. The life got smaller and clearer.',
+    path: 'M0,52 L80,40 L160,28 L220,18 L280,14 L340,18 L420,26 L500,34 L560,38'
+  },
+  carry: {
+    name: 'The carrying',
+    desc: 'The weight never lifted. The work didn\'t fix it. The work made it visible. The line bends under what it holds but it never stops moving.',
+    path: 'M0,20 L100,22 L200,28 L280,38 Q360,62 420,48 L500,42 L560,40'
+  },
+  build_missing: {
+    name: 'The deepening',
+    desc: 'The thing you needed didn\'t exist so you made it. Then you kept making it. Same question, deeper each year. The surface looks still. It\'s not.',
+    path: 'M0,45 L100,43 L200,42 L300,40 L400,42 L500,43 L560,44'
+  }
+};
+
+function choose(scene, val) {
+  choices[scene] = val;
+  document.getElementById('s' + scene).classList.remove('active');
+  document.getElementById('s' + (scene + 1)).classList.add('active');
+  if (scene === 6) showResult();
+}
+
+function showResult() {
+  var uc = {i: choices[0], o: choices[1], w: choices[2], p: choices[3], f: choices[4]};
+  var scored = practitioners.map(function(pr) {
+    var score = 0;
+    fields.forEach(function(f) {
+      if (pr[f] === uc[f] && pr[f] !== 'none') score += 2;
+      else if (pr[f] === uc[f]) score += 0.5;
+    });
+    return {pr: pr, score: score};
+  });
+  scored.sort(function(a, b) { return b.score - a.score; });
+  var top = scored.slice(0, 5).filter(function(s) { return s.score > 0; });
+  var arc = archetypes[choices[2]];
+
+  var html = '<div class="rt">' + arc.name + '</div>';
+  html += '<div class="rd">' + arc.desc + '</div>';
+  html += '<div class="rl"><svg width="100%" viewBox="0 0 560 60"><path id="resLine" d="' + arc.path + '" fill="none" stroke="#8a8880" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+  if (top.length) {
+    html += '<div class="rm"><strong>Similar:</strong> ' + top.map(function(s) { return s.pr.n; }).join(', ') + '</div>';
+  }
+  html += '<div class="restart" onclick="restart()">Play again</div>';
+
+  var res = document.getElementById('res');
+  res.innerHTML = html;
+  setTimeout(function() {
+    res.classList.add('vis');
+    var line = document.getElementById('resLine');
+    if (line) {
+      var len = line.getTotalLength();
+      line.style.strokeDasharray = len;
+      line.style.strokeDashoffset = len;
+      line.style.transition = 'stroke-dashoffset 2s ease-out';
+      setTimeout(function() { line.style.strokeDashoffset = '0'; }, 300);
+    }
+  }, 100);
+}
+
+function restart() {
+  choices = [];
+  document.querySelectorAll('.scene').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById('s0').classList.add('active');
+  document.getElementById('res').classList.remove('vis');
+  document.getElementById('res').innerHTML = '';
+}
+</script>
+
+</body>
+</html>
